@@ -11,7 +11,7 @@ const HomePage = () => {
 
 
   const startGame = () => {
-    navigate('/game');
+    navigate('/saja');
   };
 
 

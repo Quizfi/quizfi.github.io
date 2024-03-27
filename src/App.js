@@ -8,7 +8,7 @@ function App() {
     <Router basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/game" element={<QuizGame />} />
+        <Route path="/saja" element={<QuizGame />} />
       </Routes>
     </Router>
   );
