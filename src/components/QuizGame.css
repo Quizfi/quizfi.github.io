@@ -6,8 +6,6 @@
 }
 
 
-
-
 .header h1 {
   margin: 0;
   font-size: 24px;
@@ -124,6 +122,12 @@
  }
 
 
+ /* QuizGame.css에 추가 */
+.hidden {
+  display: none;
+}
+
+
 .answer-check-box {
   background-color: #f0f0f0;
   width: calc(700px - 40px); /* 퀴즈 박스의 가로 크기에 맞게 조정 */
@@ -179,7 +183,7 @@
 
 
 
-.restart-box {
+.next-question-box {
   background-color: #000000;
   color: rgb(255, 0, 0);
   width: 140px; /* 박스의 고정된 너비 */
@@ -232,7 +236,7 @@
 
 
 
-.restart-box {
+.next-question-box {
   float: left;
 }
 
