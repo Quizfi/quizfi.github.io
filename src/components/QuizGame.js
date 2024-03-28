@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './QuizGame.css';
 import quizData from '../db/quizData.json';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
 
 const QuizGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
@@ -141,26 +143,32 @@ const QuizGame = () => {
         {/* 현재 문제 표시 */}
         <div className="box quiz-box">
           {gameStarted ? currentQuestion : (score === quizData.length ? "-완- 당신은 사자성어 왕!!!" : <div>스타트 버튼을 누르면 게임이 시작됩니다.</div>)}
+          <div className="score-box">SCORE: {score}점</div> {/* score 박스를 quiz-box 내부로 이동 */}
         </div>
   
         {/* 입력 박스 및 ENTER 버튼 */}
         <div className="box-wrapper">
-          <input
-            ref={answerInputRef}
-            type="text"
-            className="box answer-input-box"
-            value={answer}
-            onChange={handleInputChange}
-            onKeyDown={handleEnterKeyPress}
-            placeholder="정답을 입력하세요."
-            disabled={!gameStarted}
-          />
-          <div
-            className="box enter-box"
-            onClick={checkAnswer}
-          >
-            ENTER
-          </div>
+        <input
+          ref={answerInputRef}
+          type="text"
+          className="box answer-input-box"
+          value={answer}
+          onChange={handleInputChange}
+          onKeyDown={handleEnterKeyPress}
+          placeholder="정답을 입력하세요."
+          disabled={!gameStarted || isCorrect !== null} // 수정된 조건
+        />
+
+        <div
+          className={`box enter-box ${!gameStarted || isCorrect !== null ? 'disabled' : ''}`}
+          onClick={() => {
+          if(gameStarted && isCorrect === null) {
+          checkAnswer();
+        }
+        }}
+        >
+  <FontAwesomeIcon icon={faSignInAlt} />
+</div>
         </div>
   
         {/* '정답 확인' 및 '다음 문제' 박스 (조건부 렌더링) */}
@@ -179,11 +187,6 @@ const QuizGame = () => {
             </div>
           </div>
         )}
-  
-        {/* 점수 표시 */}
-        <div className="box score-box">
-          SCORE: {score}점
-        </div>
   
         {/* 게임 시작 버튼 */}
         {!gameStarted && (
