@@ -133,9 +133,9 @@ const QuizGame = () => {
     <div>
       {/* 헤더 및 소개 텍스트 */}
       <div className="header">
-        <h1 onClick={goToHome} style={{ cursor: 'pointer' }}>📚 Quizfy</h1>
-      </div>
-      <div className="lion-saying-quiz-text">사자성어 퀴즈</div>
+  <h1 onClick={goToHome} style={{ cursor: 'pointer' }}>📚 Quizfy</h1>
+  <div className="header-title">사자성어</div>
+</div>
       
       <div className="quiz-game-container">
         {/* 현재 문제 표시 */}
