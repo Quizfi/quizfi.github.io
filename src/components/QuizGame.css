@@ -239,6 +239,12 @@ body {
       box-sizing: border-box; /* 패딩과 보더를 포함한 너비로 설정 */
     }
 
+    .quiz-game-container {
+      /* 화면 높이의 50%를 사용하여 요소의 높이 조정 */
+      height: calc(var(--vh, 1vh) * 50);
+      overflow: auto; /* 필요에 따라 스크롤바 추가 */
+    }
+
     .quiz-box{
       font-size: 20px;
       height: 220px;
@@ -283,8 +289,8 @@ body {
     .answer-check-box {
       position: absolute; /* 절대 위치 설정 */
       width: 90%;
-      height: 75px;
-      top: 70%; /* 상단 정렬 */
+      height: 60px;
+      top: 75%; /* 상단 정렬 */
       left: 50%; /* 좌측 정렬 */
       display: flex;
       justify-content: center; /* 내용을 가로 방향으로 가운데 정렬 */
@@ -300,7 +306,7 @@ body {
     .answer-input-box {
       width: 50%; /* 8의 비율로 너비를 설정 */
       min-width: 0; /* flex 항목이 줄어들 수 있도록 설정 */
-      height: 20px;
+      height: 3px;
       font-size: 15px;
       margin-right: 10px;
     }
@@ -308,7 +314,7 @@ body {
    
     .enter-box {
       width: 40px; /* 2의 비율로 너비를 설정 */
-      height: 50px;
+      height: 32px;
       border-radius: 10px;
       min-width: 0; /* flex 항목이 줄어들 수 있도록 설정 */
       font-size: 15px;
