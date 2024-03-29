@@ -83,21 +83,6 @@ const QuizGame = () => {
   };
 
   useEffect(() => {
-    // 뷰포트 높이를 기반으로 한 CSS 변수 설정
-    function adjustVH() {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-
-    // 컴포넌트가 마운트될 때 및 창 크기가 변경될 때 실행
-    window.addEventListener('resize', adjustVH);
-    adjustVH(); // 초기 설정
-
-    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
-    return () => window.removeEventListener('resize', adjustVH);
-  }, []);
-
-  useEffect(() => {
     if (score === quizData.length) {
       setGameStarted(false);
       setCurrentQuestion('-완- 당신은 사자성어 왕!!');
