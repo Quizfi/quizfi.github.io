@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import './QuizGame.css';
 import quizData from '../db/quizData.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUpFromBracket, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { Helmet } from 'react-helmet';
+
 
 const QuizGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
@@ -135,17 +137,35 @@ const QuizGame = () => {
     <div>
       {/* 헤더 및 소개 텍스트 */}
       <div className="header">
+      <Helmet>
+        <title>Quizfy</title>
+        <meta name="description" content="사자성어 퀴즈 게임을 도전해보세요!" />
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="keywords" content="사자성어, 퀴즈, 킬링타임, 도전, 게임" />
+        <meta property="og:title" content="Quizfy: 사자성어 퀴즈 게임" />
+        <meta property="og:description" content="Quizfy에서 사자성어 퀴즈를 즐겨보세요. 지식을 테스트하고 새로운 것을 배울 기회를 가질 수 있습니다." />
+        <meta property="og:url" content="https://quizfi.github.io/saja" />
+        {/* 다른 SEO 관련 태그를 여기에 추가할 수 있습니다. */}
+      </Helmet>
   <h1 onClick={goToHome} style={{ cursor: 'pointer' }}>📚 Quizfy</h1>
   <div className="header-title">사자성어</div>
-</div>
-      
+</div>      
       <div className="quiz-game-container">
         {/* 현재 문제 표시 */}
-        <div className="box quiz-box">
-          {gameStarted ? currentQuestion : (score === quizData.length ? "-완- 당신은 사자성어 왕!!!" : <div>스타트 버튼을 누르면 게임이 시작됩니다.</div>)}
-          <div className="score-box">SCORE: {score}점</div> {/* score 박스를 quiz-box 내부로 이동 */}
-        </div>
-  
+        <div className="quiz-box">
+        <div className="quiz-box-header">
+        <div className="controls-container">
+        <span className="control-button"></span>
+        <span className="control-button"></span>
+        <span className="control-button"></span>
+    </div>
+  </div>
+  <div className="quiz-content">
+    {gameStarted ? currentQuestion : (score === quizData.length ? "-완- 당신은 사자성어 왕!!!" : <div>스타트 버튼을 누르면 게임이 시작됩니다.</div>)}
+    <div className="score-box">SCORE: {score}점</div>
+  </div>
+</div>  
         {/* 입력 박스 및 ENTER 버튼 */}
         <div className="box-wrapper">
         <input
@@ -167,7 +187,7 @@ const QuizGame = () => {
         }
         }}
         >
-  <FontAwesomeIcon icon={faSignInAlt} />
+  <FontAwesomeIcon icon={faArrowUpFromBracket} />
 </div>
         </div>
   
@@ -180,11 +200,11 @@ const QuizGame = () => {
               {isCorrect === null && <div>정답확인</div>}
             </div>
             <div
-              className={`box next-question-box ${!gameStarted ? 'disabled' : ''}`}
-              onClick={handleNextQuestionClick}
-            >
-              NEXT QUESTION
-            </div>
+         className={`box next-question-box ${!gameStarted ? 'disabled' : ''}`}
+        onClick={handleNextQuestionClick}
+>
+  <FontAwesomeIcon icon={faArrowRight} size="2x" /> {/* 화살표 아이콘 사용 */}
+</div>
           </div>
         )}
   
