@@ -24,30 +24,43 @@ const QuizGame = () => {
 
 
   useEffect(() => {
-    let initialScrollPosition = 0; // 초기 스크롤 위치를 저장할 변수
+    let initialViewportHeight = window.innerHeight;
+    let isKeyboardVisible = false;
   
-    const handleVisualViewPortResize = () => {
-      // 모바일 환경에서만 실행하도록 화면 너비를 체크
-      if (window.matchMedia("(max-width: 768px)").matches) {
-        if (!initialScrollPosition) {
-          // 가상 키보드가 활성화되면 현재 스크롤 위치를 저장
-          initialScrollPosition = window.scrollY;
-          // 스크롤 조정이 필요한 경우 여기에 로직 추가
-          window.scrollTo(0, 60); // 예시: 스크롤을 60px 아래로 이동
+    const handleFocus = () => {
+      initialViewportHeight = window.innerHeight;
+    };
+  
+    const handleResize = () => {
+      const currentViewportHeight = window.innerHeight;
+      // 화면 높이가 충분히 줄어들었다고 판단되면 가상 키보드가 활성화된 것으로 간주
+      if (currentViewportHeight < initialViewportHeight - 100) { // 임계값은 상황에 따라 조정
+        if (!isKeyboardVisible) {
+          // 가상 키보드가 활성화됨을 감지하고 스크롤 조정
+          window.scrollTo(0, 60);
+          isKeyboardVisible = true;
         }
-      } else {
-        if (initialScrollPosition) {
-          // 가상 키보드가 비활성화되면 초기 스크롤 위치로 복원
-          window.scrollTo(0, initialScrollPosition);
-          initialScrollPosition = 0; // 초기 스크롤 위치 초기화
-        }
+      } else if (isKeyboardVisible) {
+        // 화면 높이가 원래대로 돌아왔다면 가상 키보드가 비활성화된 것으로 간주
+        isKeyboardVisible = false;
+        // 필요하다면 여기서 키보드 비활성화 시의 로직을 추가
       }
     };
   
-    window.visualViewport?.addEventListener('resize', handleVisualViewPortResize);
+    // 포커스 이벤트 리스너 추가
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+      input.addEventListener('focus', handleFocus);
+    });
+  
+    // 리사이즈 이벤트 리스너 추가
+    window.addEventListener('resize', handleResize);
   
     return () => {
-      window.visualViewport?.removeEventListener('resize', handleVisualViewPortResize);
+      window.removeEventListener('resize', handleResize);
+      inputs.forEach(input => {
+        input.removeEventListener('focus', handleFocus);
+      });
     };
   }, []);
 
@@ -208,7 +221,7 @@ const QuizGame = () => {
           onKeyDown={handleEnterKeyPress}
           placeholder="정답을 입력하세요."
           disabled={!gameStarted || isCorrect !== null} // 수정된 조건
-          autoComplete="off" // 자동완성 비활성화
+          autoComplete="new-password" // 자동완성 비활성화
         />
 
         <div
