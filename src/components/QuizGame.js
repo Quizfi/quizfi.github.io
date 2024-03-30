@@ -33,16 +33,17 @@ const QuizGame = () => {
   }, []);
 
   useEffect(() => {
+    // 이벤트 핸들러로 사용될 handleFocus 함수를 정의
     const handleFocus = () => {
-      window.scrollBy({ top: 60, behavior: 'auto' });
+      window.scrollBy({ top: 60, behavior: 'smooth' });
     };
-
+  
     // 모든 input 요소에 대해 이벤트 리스너 추가
     const inputs = document.querySelectorAll('input');
     inputs.forEach(input => {
       input.addEventListener('focus', handleFocus);
     });
-
+  
     // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
     return () => {
       inputs.forEach(input => {
