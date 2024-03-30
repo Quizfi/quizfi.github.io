@@ -20,6 +20,25 @@ const QuizGame = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const answerInputRef = useRef(null);
   const correctSound = useRef(new Audio('/correct.mp3'));
+  const containerRef = useRef(null); // 여기서 containerRef를 정의합니다.
+
+
+  useEffect(() => {
+    const handleVisualViewPortResize = () => {
+      const currentVisualViewportHeight = window.visualViewport?.height;
+      if (containerRef.current) {
+        containerRef.current.style.height = `${currentVisualViewportHeight - 30}px`;
+        window.scrollTo(0, 40);
+      }
+    };
+
+    window.visualViewport?.addEventListener('resize', handleVisualViewPortResize);
+
+    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+    return () => {
+      window.visualViewport?.removeEventListener('resize', handleVisualViewPortResize);
+    };
+  }, []);
 
   const playCorrectSound = useCallback(() => {
     correctSound.current.currentTime = 0;
@@ -32,15 +51,6 @@ const QuizGame = () => {
     incorrectSound.play();
   }, []);
 
-  document.querySelectorAll('input').forEach(input => {
-    input.addEventListener('focus', (event) => {
-      // 화면 너비가 768픽셀 이하인 경우에만 기본 동작을 방지
-      if (window.innerWidth <= 768) {
-        event.preventDefault();
-        // 필요한 경우, 추가적인 로직을 실행
-      }
-    });
-  });
 
   const selectNextQuestion = useCallback(() => {
     const selectedQuestions = selectedQuestionsIndex === 1 ? selectedQuestions1 : selectedQuestions2;
@@ -161,7 +171,7 @@ const QuizGame = () => {
   <h1 onClick={goToHome} style={{ cursor: 'pointer' }}>📚 Quizfy</h1>
   <div className="header-title">사자성어</div>
 </div>      
-      <div className="quiz-game-container">
+      <div ref={containerRef} className="quiz-game-container">
         {/* 현재 문제 표시 */}
         <div className="quiz-box">
         <div className="quiz-box-header">
