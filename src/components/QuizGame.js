@@ -21,25 +21,32 @@ const QuizGame = () => {
   const answerInputRef = useRef(null);
   const correctSound = useRef(new Audio('/correct.mp3'));
   const containerRef = useRef(null); // 여기서 containerRef를 정의합니다.
-  // 초기 스크롤 위치 저장
-  const initialScrollY = useRef(window.scrollY);
 
   useEffect(() => {
+    // 화면의 초기 높이 저장
+    let originalHeight = window.innerHeight;
+  
     const handleResize = () => {
-      // 모바일 환경에서만 실행: 화면 너비가 768px 이하인 경우
-      if (window.matchMedia("(max-width: 768px)").matches) {
-        if (window.innerHeight < initialScrollY.current) {
-          window.scrollTo({ top: 50, behavior: 'smooth' });
-        } else {
-          window.scrollTo({ top: initialScrollY.current, behavior: 'smooth' });
-        }
+      const newHeight = window.innerHeight; // 현재 화면의 높이
+  
+      // 화면 높이가 줄어들 경우 (키보드가 활성화된 것으로 간주)
+      if (newHeight < originalHeight - 100) {
+        // 화면을 50px 아래로 내림
+        window.scrollTo({ top: 80, behavior: 'auto' });
+      } else {
+        // 키보드가 비활성화되면 화면을 원래대로 복원
+        window.scrollTo({ top: 0, behavior: 'auto' });
       }
+  
+      // 새로운 높이를 기존 높이로 업데이트
+      originalHeight = newHeight;
     };
-
-    initialScrollY.current = window.scrollY;
+  
+    // resize 이벤트 리스너 등록
     window.addEventListener('resize', handleResize);
-
+  
     return () => {
+      // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
       window.removeEventListener('resize', handleResize);
     };
   }, []);
@@ -203,11 +210,6 @@ const QuizGame = () => {
           placeholder="정답을 입력하세요."
           disabled={!gameStarted || isCorrect !== null} // 수정된 조건
           autoComplete="new-password" // 자동완성 비활성화
-          onFocus={() => {
-            if (window.matchMedia("(max-width: 768px)").matches) {
-              initialScrollY.current = window.scrollY;
-            }
-          }}
         />
 
         <div
