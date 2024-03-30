@@ -24,30 +24,27 @@ const QuizGame = () => {
 
 
   useEffect(() => {
-    let initialViewportHeight = window.innerHeight;
-    let isKeyboardVisible = false;
+    // 초기 스크롤 위치를 저장할 변수 선언
+    let initialScrollPosition = window.scrollY; // 컴포넌트 마운트 시의 스크롤 위치
+    let initialViewportHeight = window.innerHeight; // 초기 화면 높이
   
     const handleFocus = () => {
-      initialViewportHeight = window.innerHeight;
+      // 포커스 시점의 스크롤 위치 저장
+      initialScrollPosition = window.scrollY;
     };
   
     const handleResize = () => {
       const currentViewportHeight = window.innerHeight;
-      // 화면 높이가 충분히 줄어들었다고 판단되면 가상 키보드가 활성화된 것으로 간주
-      if (currentViewportHeight < initialViewportHeight - 100) { // 임계값은 상황에 따라 조정
-        if (!isKeyboardVisible) {
-          // 가상 키보드가 활성화됨을 감지하고 스크롤 조정
-          window.scrollTo(0, 60);
-          isKeyboardVisible = true;
-        }
-      } else if (isKeyboardVisible) {
-        // 화면 높이가 원래대로 돌아왔다면 가상 키보드가 비활성화된 것으로 간주
-        isKeyboardVisible = false;
-        // 필요하다면 여기서 키보드 비활성화 시의 로직을 추가
+      // 화면 높이가 초기 높이보다 작아진 경우 (가상 키보드 활성화로 추정)
+      if (currentViewportHeight < initialViewportHeight) {
+        window.scrollTo(0, 60); // 스크롤 조정
+      } else {
+        // 화면 높이가 초기 높이로 복원된 경우 (가상 키보드 비활성화로 추정)
+        window.scrollTo(0, initialScrollPosition); // 초기 스크롤 위치로 복원
       }
     };
   
-    // 포커스 이벤트 리스너 추가
+    // 모든 입력 필드에 이벤트 리스너 추가
     const inputs = document.querySelectorAll('input');
     inputs.forEach(input => {
       input.addEventListener('focus', handleFocus);
@@ -56,6 +53,7 @@ const QuizGame = () => {
     // 리사이즈 이벤트 리스너 추가
     window.addEventListener('resize', handleResize);
   
+    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
     return () => {
       window.removeEventListener('resize', handleResize);
       inputs.forEach(input => {
