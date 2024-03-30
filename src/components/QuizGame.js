@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet';
 const QuizGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState('');
-  const [answer, setAnswer] = useState('');
+  //const [answer, setAnswer] = useState('');
   const [isCorrect, setIsCorrect] = useState(null);
   const [score, setScore] = useState(0);
   const [selectedQuestions1, setSelectedQuestions1] = useState([]);
@@ -20,28 +20,39 @@ const QuizGame = () => {
   const [showFeedback, setShowFeedback] = useState(false);
   const answerInputRef = useRef(null);
   const correctSound = useRef(new Audio('/correct.mp3'));
-  const containerRef = useRef(null); // 여기서 containerRef를 정의합니다.
-  // 초기 스크롤 위치 저장
-  const initialScrollY = useRef(window.scrollY);
+   // State를 사용하여 입력 필드의 값 관리
+   const [inputValue, setInputValue] = useState('');
+   // useRef를 사용하여 원래 스크롤 위치 저장
+   const originalScrollPosition = useRef(0);
 
-  useEffect(() => {
-    const handleResize = () => {
-      // 모바일 환경에서만 실행: 화면 너비가 768px 이하인 경우
-      if (window.matchMedia("(max-width: 768px)").matches) {
-        if (window.innerHeight < initialScrollY.current) {
-          window.scrollTo({ top: 50, behavior: 'smooth' });
-        } else {
-          window.scrollTo({ top: initialScrollY.current, behavior: 'smooth' });
-        }
-      }
+ 
+   useEffect(() => {
+    // 포커스될 때 실행될 함수
+    const handleFocus = () => {
+      // 현재 스크롤 위치 저장
+      originalScrollPosition.current = window.scrollY;
+      // 포커스 이벤트가 발생했을 때 스크롤 조정 로직
+      const yOffset = window.pageYOffset; 
+      const inputOffset = answerInputRef.current.getBoundingClientRect().top;
+      window.scrollTo({ top: yOffset + inputOffset - 100, behavior: 'smooth' }); // 예시값, 필요에 따라 조정
     };
-
-    initialScrollY.current = window.scrollY;
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
+  
+    // 포커스가 사라질 때 실행될 함수
+    const handleBlur = () => {
+      window.scrollTo({ top: originalScrollPosition.current, behavior: 'smooth' }); // 원래 스크롤 위치로 복원
     };
+  
+    const inputElement = answerInputRef.current;
+    if (inputElement) {
+      inputElement.addEventListener('focus', handleFocus);
+      inputElement.addEventListener('blur', handleBlur);
+  
+      // 컴포넌트 언마운트 시 이벤트 리스너 제거
+      return () => {
+        inputElement.removeEventListener('focus', handleFocus);
+        inputElement.removeEventListener('blur', handleBlur);
+      };
+    }
   }, []);
 
 
@@ -74,38 +85,42 @@ const QuizGame = () => {
 
     setSelectedQuestions([...selectedQuestions, randomIndex]);
     setCurrentQuestion(quizData[randomIndex].question);
-    setAnswer('');
+    setInputValue('');
     answerInputRef.current.disabled = false;
     setIsCorrect(null);
   }, [selectedQuestions1, selectedQuestions2, selectedQuestionsIndex]);
 
   const handleInputChange = (event) => {
-    setAnswer(event.target.value);
-  };
+    setInputValue(event.target.value); // 입력값을 inputValue 상태에 반영
+};
 
-  const checkAnswer = () => {
-    if (!gameStarted || answer.trim().length === 0) return; // 게임이 시작되지 않았거나 입력 필드가 비어있으면 반환
-  
-    const currentQuiz = quizData.find((item) => item.question === currentQuestion);
-    if (!currentQuiz) {
-      console.error('현재 질문을 찾을 수 없습니다.');
-      return;
-    }
-  
-    const correctAnswer = currentQuiz.correctAnswer.join('');
-    if (answer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
-      setIsCorrect(true);
-      setScore(score + 1);
-      playCorrectSound();
-      setShowFeedback(true); // 정답일 때 피드백 박스를 표시합니다.
-    } else {
-      setIsCorrect(false);
-      playIncorrectSound();
-      const formattedCorrectAnswer = currentQuiz.correctAnswer.join('');
-      setAnswerFeedback(`(정답: ${formattedCorrectAnswer})`);
-      setShowFeedback(true); // 오답일 때 피드백 박스를 표시합니다.
-    }
-  };
+// 정답 확인 함수
+const checkAnswer = () => {
+  if (!gameStarted || inputValue.trim().length === 0) return; // 게임이 시작되지 않았거나 입력 필드가 비어있으면 반환
+
+  const currentQuiz = quizData.find((item) => item.question === currentQuestion);
+  if (!currentQuiz) {
+    console.error('현재 질문을 찾을 수 없습니다.');
+    return;
+  }
+
+  const correctAnswer = currentQuiz.correctAnswer.join('');
+  // inputValue를 사용하여 정답을 체크
+  if (inputValue.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+    setIsCorrect(true);
+    setScore(score + 1);
+    playCorrectSound();
+    setShowFeedback(true); // 정답일 때 피드백 박스를 표시합니다.
+  } else {
+    setIsCorrect(false);
+    playIncorrectSound();
+    const formattedCorrectAnswer = currentQuiz.correctAnswer.join('');
+    setAnswerFeedback(`(정답: ${formattedCorrectAnswer})`);
+    setShowFeedback(true); // 오답일 때 피드백 박스를 표시합니다.
+  }
+  // 정답 확인 후 inputValue 초기화
+  setInputValue('');
+};
 
   useEffect(() => {
     if (score === quizData.length) {
@@ -176,7 +191,7 @@ const QuizGame = () => {
   <h1 onClick={goToHome} style={{ cursor: 'pointer' }}>📚 Quizfy</h1>
   <div className="header-title">사자성어</div>
 </div>      
-      <div ref={containerRef} className="quiz-game-container">
+      <div className="quiz-game-container">
         {/* 현재 문제 표시 */}
         <div className="quiz-box">
         <div className="quiz-box-header">
@@ -194,21 +209,16 @@ const QuizGame = () => {
         {/* 입력 박스 및 ENTER 버튼 */}
         <div className="box-wrapper">
         <input
-          ref={answerInputRef}
-          type="text"
-          className="box answer-input-box"
-          value={answer}
-          onChange={handleInputChange}
-          onKeyDown={handleEnterKeyPress}
-          placeholder="정답을 입력하세요."
-          disabled={!gameStarted || isCorrect !== null} // 수정된 조건
-          autoComplete="new-password" // 자동완성 비활성화
-          onFocus={() => {
-            if (window.matchMedia("(max-width: 768px)").matches) {
-              initialScrollY.current = window.scrollY;
-            }
-          }}
-        />
+  ref={answerInputRef}
+  type="text"
+  className="box answer-input-box"
+  value={inputValue} // 이 부분에서 inputValue 상태를 사용하려면 상태를 정의하고 관리해야 합니다.
+  onChange={handleInputChange} // 입력 값이 변경될 때 호출될 함수
+  onKeyDown={handleEnterKeyPress} // 키 입력(예: 엔터 키)이 있을 때 호출될 함수
+  placeholder="정답을 입력하세요."
+  disabled={!gameStarted || isCorrect !== null}
+  autoComplete="off"
+/>
 
         <div
           className={`box enter-box ${!gameStarted || isCorrect !== null ? 'disabled' : ''}`}
