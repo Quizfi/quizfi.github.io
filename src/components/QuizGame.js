@@ -24,18 +24,16 @@ const QuizGame = () => {
 
 
   useEffect(() => {
+    let initialScrollPosition = 0; // 초기 스크롤 위치를 저장할 변수
+  
     const handleVisualViewPortResize = () => {
       // 모바일 환경에서만 실행하도록 화면 너비를 체크
       if (window.matchMedia("(max-width: 768px)").matches) {
-        const currentVisualViewportHeight = window.visualViewport?.height;
         if (!initialScrollPosition) {
           // 가상 키보드가 활성화되면 현재 스크롤 위치를 저장
           initialScrollPosition = window.scrollY;
-        }
-  
-        if (containerRef.current) {
-          containerRef.current.style.height = `${currentVisualViewportHeight - 30}px`; // 필요 없으면 이 줄은 제거
-          window.scrollTo(0, 60); // 또는 원하는 스크롤 조정 로직
+          // 스크롤 조정이 필요한 경우 여기에 로직 추가
+          window.scrollTo(0, 60); // 예시: 스크롤을 60px 아래로 이동
         }
       } else {
         if (initialScrollPosition) {
@@ -45,8 +43,6 @@ const QuizGame = () => {
         }
       }
     };
-  
-    let initialScrollPosition = 0; // 초기 스크롤 위치를 저장할 변수를 useEffect 바깥으로 이동해야 합니다.
   
     window.visualViewport?.addEventListener('resize', handleVisualViewPortResize);
   
