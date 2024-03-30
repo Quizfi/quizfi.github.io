@@ -24,40 +24,39 @@ const QuizGame = () => {
 
 
   useEffect(() => {
-    // 초기 스크롤 위치를 저장할 변수 선언
-    let initialScrollPosition = window.scrollY; // 컴포넌트 마운트 시의 스크롤 위치
-    let initialViewportHeight = window.innerHeight; // 초기 화면 높이
+    // 초기 스크롤 위치 저장 변수
+    let initialScrollY = window.scrollY;
   
+    // 입력 필드 포커스 이벤트 핸들러
     const handleFocus = () => {
-      // 포커스 시점의 스크롤 위치 저장
-      initialScrollPosition = window.scrollY;
+      // 현재 스크롤 위치 저장
+      initialScrollY = window.scrollY;
+  
+      // 키보드 활성화를 기다린 후 스크롤 조정
+      setTimeout(() => {
+        // 현재 스크롤에서 살짝 내려서 입력 필드와 키보드 사이의 공간 확보
+        window.scrollTo({ top: window.scrollY - 30, behavior: 'smooth' });
+      }, 100); // 100ms 대기 후 스크롤 조정
     };
   
-    const handleResize = () => {
-      const currentViewportHeight = window.innerHeight;
-      // 화면 높이가 초기 높이보다 작아진 경우 (가상 키보드 활성화로 추정)
-      if (currentViewportHeight < initialViewportHeight) {
-        window.scrollTo(0, 60); // 스크롤 조정
-      } else {
-        // 화면 높이가 초기 높이로 복원된 경우 (가상 키보드 비활성화로 추정)
-        window.scrollTo(0, initialScrollPosition); // 초기 스크롤 위치로 복원
-      }
+    // 입력 필드 포커스 해제 이벤트 핸들러
+    const handleBlur = () => {
+      // 포커스 해제 시 초기 스크롤 위치로 복원
+      window.scrollTo({ top: initialScrollY, behavior: 'smooth' });
     };
   
     // 모든 입력 필드에 이벤트 리스너 추가
     const inputs = document.querySelectorAll('input');
     inputs.forEach(input => {
       input.addEventListener('focus', handleFocus);
+      input.addEventListener('blur', handleBlur);
     });
   
-    // 리사이즈 이벤트 리스너 추가
-    window.addEventListener('resize', handleResize);
-  
-    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+    // 컴포넌트 언마운트 시 이벤트 리스너 제거
     return () => {
-      window.removeEventListener('resize', handleResize);
       inputs.forEach(input => {
         input.removeEventListener('focus', handleFocus);
+        input.removeEventListener('blur', handleBlur);
       });
     };
   }, []);
