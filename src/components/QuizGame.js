@@ -25,16 +25,31 @@ const QuizGame = () => {
 
   useEffect(() => {
     const handleVisualViewPortResize = () => {
-      const currentVisualViewportHeight = window.visualViewport?.height;
-      if (containerRef.current) {
-        containerRef.current.style.height = `${currentVisualViewportHeight - 30}px`;
-        window.scrollTo(0, 40);
+      // 모바일 환경에서만 실행하도록 화면 너비를 체크
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        const currentVisualViewportHeight = window.visualViewport?.height;
+        if (!initialScrollPosition) {
+          // 가상 키보드가 활성화되면 현재 스크롤 위치를 저장
+          initialScrollPosition = window.scrollY;
+        }
+  
+        if (containerRef.current) {
+          containerRef.current.style.height = `${currentVisualViewportHeight - 30}px`; // 필요 없으면 이 줄은 제거
+          window.scrollTo(0, 60); // 또는 원하는 스크롤 조정 로직
+        }
+      } else {
+        if (initialScrollPosition) {
+          // 가상 키보드가 비활성화되면 초기 스크롤 위치로 복원
+          window.scrollTo(0, initialScrollPosition);
+          initialScrollPosition = 0; // 초기 스크롤 위치 초기화
+        }
       }
     };
-
+  
+    let initialScrollPosition = 0; // 초기 스크롤 위치를 저장할 변수를 useEffect 바깥으로 이동해야 합니다.
+  
     window.visualViewport?.addEventListener('resize', handleVisualViewPortResize);
-
-    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+  
     return () => {
       window.visualViewport?.removeEventListener('resize', handleVisualViewPortResize);
     };
@@ -197,6 +212,7 @@ const QuizGame = () => {
           onKeyDown={handleEnterKeyPress}
           placeholder="정답을 입력하세요."
           disabled={!gameStarted || isCorrect !== null} // 수정된 조건
+          autoComplete="off" // 자동완성 비활성화
         />
 
         <div
