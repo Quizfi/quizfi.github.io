@@ -21,45 +21,29 @@ const QuizGame = () => {
   const answerInputRef = useRef(null);
   const correctSound = useRef(new Audio('/correct.mp3'));
   const containerRef = useRef(null); // 여기서 containerRef를 정의합니다.
-
+  // 초기 스크롤 위치 저장
+  const initialScrollY = useRef(window.scrollY);
 
   useEffect(() => {
-    // 초기 스크롤 위치 저장 변수
-    let initialScrollY = window.scrollY;
-  
-    // 입력 필드 포커스 이벤트 핸들러
-    const handleFocus = () => {
-      // 현재 스크롤 위치 저장
-      initialScrollY = window.scrollY;
-  
-      // 키보드 활성화를 기다린 후 스크롤 조정
-      setTimeout(() => {
-        // 현재 스크롤에서 살짝 내려서 입력 필드와 키보드 사이의 공간 확보
-        window.scrollTo({ top: window.scrollY - 30, behavior: 'smooth' });
-      }, 100); // 100ms 대기 후 스크롤 조정
+    const handleResize = () => {
+      // 모바일 환경에서만 실행: 화면 너비가 768px 이하인 경우
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        if (window.innerHeight < initialScrollY.current) {
+          window.scrollTo({ top: 50, behavior: 'smooth' });
+        } else {
+          window.scrollTo({ top: initialScrollY.current, behavior: 'smooth' });
+        }
+      }
     };
-  
-    // 입력 필드 포커스 해제 이벤트 핸들러
-    const handleBlur = () => {
-      // 포커스 해제 시 초기 스크롤 위치로 복원
-      window.scrollTo({ top: initialScrollY, behavior: 'smooth' });
-    };
-  
-    // 모든 입력 필드에 이벤트 리스너 추가
-    const inputs = document.querySelectorAll('input');
-    inputs.forEach(input => {
-      input.addEventListener('focus', handleFocus);
-      input.addEventListener('blur', handleBlur);
-    });
-  
-    // 컴포넌트 언마운트 시 이벤트 리스너 제거
+
+    initialScrollY.current = window.scrollY;
+    window.addEventListener('resize', handleResize);
+
     return () => {
-      inputs.forEach(input => {
-        input.removeEventListener('focus', handleFocus);
-        input.removeEventListener('blur', handleBlur);
-      });
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
+
 
   const playCorrectSound = useCallback(() => {
     correctSound.current.currentTime = 0;
@@ -219,6 +203,11 @@ const QuizGame = () => {
           placeholder="정답을 입력하세요."
           disabled={!gameStarted || isCorrect !== null} // 수정된 조건
           autoComplete="new-password" // 자동완성 비활성화
+          onFocus={() => {
+            if (window.matchMedia("(max-width: 768px)").matches) {
+              initialScrollY.current = window.scrollY;
+            }
+          }}
         />
 
         <div

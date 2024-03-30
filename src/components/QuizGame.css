@@ -102,7 +102,7 @@
   display: flex; /* Flexbox 적용 */
   justify-content: center; /* 가로 방향 가운데 정렬 */
   align-items: center; /* 세로 방향 가운데 정렬 */
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 
