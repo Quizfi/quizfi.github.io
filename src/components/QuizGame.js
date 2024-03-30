@@ -23,30 +23,29 @@ const QuizGame = () => {
   const containerRef = useRef(null); // 여기서 containerRef를 정의합니다.
 
   useEffect(() => {
-    // 화면의 초기 높이 저장
+    // 스크롤 위치를 저장할 변수
+    let savedScrollPosition = 0;
+    // 화면 높이를 저장할 변수
     let originalHeight = window.innerHeight;
   
     const handleResize = () => {
-      const newHeight = window.innerHeight; // 현재 화면의 높이
-  
-      // 화면 높이가 줄어들 경우 (키보드가 활성화된 것으로 간주)
-      if (newHeight < originalHeight - 100) {
-        // 화면을 50px 아래로 내림
-        window.scrollTo({ top: 80, behavior: 'auto' });
+      const newHeight = window.innerHeight;
+      // 화면 높이가 줄어들 경우, 키보드가 활성화된 것으로 간주
+      if (newHeight < originalHeight) {
+        // 현재 스크롤 위치 저장
+        savedScrollPosition = window.scrollY;
+        // 화면을 조정하는 로직
+        window.scrollTo({ top: 50, behavior: 'auto' });
       } else {
-        // 키보드가 비활성화되면 화면을 원래대로 복원
-        window.scrollTo({ top: 0, behavior: 'auto' });
+        // 키보드가 비활성화되면 원래 스크롤 위치로 복원
+        window.scrollTo({ top: savedScrollPosition, behavior: 'auto' });
       }
-  
-      // 새로운 높이를 기존 높이로 업데이트
       originalHeight = newHeight;
     };
   
-    // resize 이벤트 리스너 등록
     window.addEventListener('resize', handleResize);
   
     return () => {
-      // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
       window.removeEventListener('resize', handleResize);
     };
   }, []);
