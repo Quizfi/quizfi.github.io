@@ -32,6 +32,25 @@ const QuizGame = () => {
     incorrectSound.play();
   }, []);
 
+  useEffect(() => {
+    const handleFocus = () => {
+      window.scrollBy({ top: 60, behavior: 'auto' });
+    };
+
+    // 모든 input 요소에 대해 이벤트 리스너 추가
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+      input.addEventListener('focus', handleFocus);
+    });
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+    return () => {
+      inputs.forEach(input => {
+        input.removeEventListener('focus', handleFocus);
+      });
+    };
+  }, []); // 빈 의존성 배열을 제공하여 컴포넌트 마운트 시에만 실행되도록 함
+
   const selectNextQuestion = useCallback(() => {
     const selectedQuestions = selectedQuestionsIndex === 1 ? selectedQuestions1 : selectedQuestions2;
     const setSelectedQuestions = selectedQuestionsIndex === 1 ? setSelectedQuestions1 : setSelectedQuestions2;
