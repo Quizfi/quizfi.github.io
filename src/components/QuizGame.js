@@ -32,25 +32,15 @@ const QuizGame = () => {
     incorrectSound.play();
   }, []);
 
-  useEffect(() => {
-    // 이벤트 핸들러로 사용될 handleFocus 함수를 정의
-    const handleFocus = () => {
-      window.scrollBy({ top: 60, behavior: 'smooth' });
-    };
-  
-    // 모든 input 요소에 대해 이벤트 리스너 추가
-    const inputs = document.querySelectorAll('input');
-    inputs.forEach(input => {
-      input.addEventListener('focus', handleFocus);
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('focus', (event) => {
+      // 화면 너비가 768픽셀 이하인 경우에만 기본 동작을 방지
+      if (window.innerWidth <= 768) {
+        event.preventDefault();
+        // 필요한 경우, 추가적인 로직을 실행
+      }
     });
-  
-    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
-    return () => {
-      inputs.forEach(input => {
-        input.removeEventListener('focus', handleFocus);
-      });
-    };
-  }, []); // 빈 의존성 배열을 제공하여 컴포넌트 마운트 시에만 실행되도록 함
+  });
 
   const selectNextQuestion = useCallback(() => {
     const selectedQuestions = selectedQuestionsIndex === 1 ? selectedQuestions1 : selectedQuestions2;
