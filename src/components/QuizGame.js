@@ -35,7 +35,7 @@ const QuizGame = () => {
         // 현재 스크롤 위치 저장
         savedScrollPosition = window.scrollY;
         // 화면을 조정하는 로직
-        window.scrollTo({ top: 50, behavior: 'auto' });
+        window.scrollTo({ top: 60, behavior: 'auto' });
       } else {
         // 키보드가 비활성화되면 원래 스크롤 위치로 복원
         window.scrollTo({ top: savedScrollPosition, behavior: 'auto' });
