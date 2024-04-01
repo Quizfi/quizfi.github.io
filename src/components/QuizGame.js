@@ -6,70 +6,52 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpFromBracket, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Helmet } from 'react-helmet';
 
-
 const QuizGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [isCorrect, setIsCorrect] = useState(null);
   const [score, setScore] = useState(0);
+  const [totalAttempts, setTotalAttempts] = useState(0);
+  const [resetCount, setResetCount] = useState(0);
   const [selectedQuestions1, setSelectedQuestions1] = useState([]);
   const [selectedQuestions2, setSelectedQuestions2] = useState([]);
   const [selectedQuestionsIndex, setSelectedQuestionsIndex] = useState(1);
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [showFeedback, setShowFeedback] = useState(false);
   const answerInputRef = useRef(null);
-  const correctSound = useRef(new Audio('/correct.mp3'));
-  const containerRef = useRef(null); // 여기서 containerRef를 정의합니다.
+  const containerRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // 스크롤 위치를 저장할 변수
     let savedScrollPosition = 0;
-    // 화면 높이를 저장할 변수
     let originalHeight = window.innerHeight;
   
     const handleResize = () => {
       const newHeight = window.innerHeight;
-      // 화면 높이가 줄어들 경우, 키보드가 활성화된 것으로 간주
       if (newHeight < originalHeight) {
-        // 현재 스크롤 위치 저장
         savedScrollPosition = window.scrollY;
-        // 화면을 조정하는 로직
         window.scrollTo({ top: 60, behavior: 'auto' });
       } else {
-        // 키보드가 비활성화되면 원래 스크롤 위치로 복원
         window.scrollTo({ top: savedScrollPosition, behavior: 'auto' });
       }
       originalHeight = newHeight;
     };
   
     window.addEventListener('resize', handleResize);
-  
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-
-  const playCorrectSound = useCallback(() => {
-    correctSound.current.currentTime = 0;
-    correctSound.current.play();
-  }, []);
-
-  const playIncorrectSound = useCallback(() => {
-    const incorrectSound = new Audio('/incorrect.mp3');
-    incorrectSound.currentTime = 0;
-    incorrectSound.play();
-  }, []);
 
 
   const selectNextQuestion = useCallback(() => {
     const selectedQuestions = selectedQuestionsIndex === 1 ? selectedQuestions1 : selectedQuestions2;
     const setSelectedQuestions = selectedQuestionsIndex === 1 ? setSelectedQuestions1 : setSelectedQuestions2;
 
-    if (selectedQuestions.length === quizData.length) {
+    if (score >= 10) {
+      // 게임 성공 종료 조건
       setGameStarted(false);
-      setCurrentQuestion('-완- 당신은 사자성어 왕!!');
+      setCurrentQuestion('-완- 사자성어 클리어!');
       return;
     }
 
@@ -78,63 +60,45 @@ const QuizGame = () => {
       randomIndex = Math.floor(Math.random() * quizData.length);
     } while (selectedQuestions.includes(randomIndex));
 
-    setSelectedQuestions([...selectedQuestions, randomIndex]);
+    setSelectedQuestions(prev => [...prev, randomIndex]);
     setCurrentQuestion(quizData[randomIndex].question);
     setAnswer('');
-    answerInputRef.current.disabled = false;
     setIsCorrect(null);
-  }, [selectedQuestions1, selectedQuestions2, selectedQuestionsIndex]);
-
-  const handleInputChange = (event) => {
-    setAnswer(event.target.value);
-  };
+    answerInputRef.current && (answerInputRef.current.disabled = false);
+  }, [selectedQuestions1, selectedQuestions2, selectedQuestionsIndex, score]);
 
   const checkAnswer = () => {
-    if (!gameStarted || answer.trim().length === 0) return; // 게임이 시작되지 않았거나 입력 필드가 비어있으면 반환
-  
-    const currentQuiz = quizData.find((item) => item.question === currentQuestion);
+    if (!gameStarted || answer.trim().length === 0) return;
+
+    const currentQuiz = quizData.find((quiz) => quiz.question === currentQuestion);
     if (!currentQuiz) {
       console.error('현재 질문을 찾을 수 없습니다.');
       return;
     }
-  
+
     const correctAnswer = currentQuiz.correctAnswer.join('');
+    setTotalAttempts(prev => prev + 1);
+
     if (answer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
       setIsCorrect(true);
-      setScore(score + 1);
-      playCorrectSound();
-      setShowFeedback(true); // 정답일 때 피드백 박스를 표시합니다.
+      setScore(prevScore => prevScore + 1);
     } else {
       setIsCorrect(false);
-      playIncorrectSound();
-      const formattedCorrectAnswer = currentQuiz.correctAnswer.join('');
-      setAnswerFeedback(`(정답: ${formattedCorrectAnswer})`);
-      setShowFeedback(true); // 오답일 때 피드백 박스를 표시합니다.
+      setScore(0); // 점수 초기화
+      setResetCount(prev => prev + 1); // 오답 횟수 증가
+      setAnswerFeedback(`(정답: ${correctAnswer})`);
     }
+    setShowFeedback(true);
   };
-
-  useEffect(() => {
-    if (score === quizData.length) {
-      setGameStarted(false);
-      setCurrentQuestion('-완- 당신은 사자성어 왕!!');
-    }
-  }, [score]);
-
-  useEffect(() => {
-    if (selectedQuestionsIndex === 1) {
-      if (selectedQuestions1.length === quizData.length) {
-        setSelectedQuestionsIndex(2);
-      }
-    } else {
-      if (selectedQuestions2.length === quizData.length) {
-        setSelectedQuestionsIndex(1);
-      }
-    }
-  }, [selectedQuestions1, selectedQuestions2, selectedQuestionsIndex]);
 
   const handleStartGame = () => {
     setGameStarted(true);
     setScore(0);
+    setTotalAttempts(0);
+    setResetCount(0);
+    setSelectedQuestions1([]);
+    setSelectedQuestions2([]);
+    setSelectedQuestionsIndex(1);
     selectNextQuestion();
   };
 
@@ -143,26 +107,30 @@ const QuizGame = () => {
       checkAnswer();
     }
   };
-  
+
   const handleNextQuestionClick = () => {
     if (isCorrect !== null || !gameStarted) {
       selectNextQuestion();
       setIsCorrect(null);
-      setShowFeedback(false); // 다음 문제로 넘어갈 때 피드백 박스를 숨깁니다.
+      setShowFeedback(false);
     }
   };
 
-  useEffect(() => {
-    if (gameStarted) {
-      answerInputRef.current.focus();
-    }
-  }, [gameStarted, currentQuestion]);
+    // 게임 시작 및 새로운 문제 선택 시 정답 입력 박스에 자동 포커스
+    useEffect(() => {
+      if (gameStarted && answerInputRef.current) {
+        answerInputRef.current.focus();
+      }
+    }, [gameStarted, currentQuestion]);
 
-  const navigate = useNavigate();
+  const handleInputChange = (event) => {
+    setAnswer(event.target.value);
+  };
 
   const goToHome = () => {
     navigate('/');
   };
+
 
   return (
     <div>
@@ -192,8 +160,17 @@ const QuizGame = () => {
         <span className="control-button"></span>
     </div>
   </div>
+  {!gameStarted && score === 10 && (
+          <div className="results-display">
+            <p>-완- 사자성어 클리어!</p>
+            <p>총 도전한 문제수: {totalAttempts}</p>
+            <p>총 정답 수: {score}</p>
+            <p>총 초기화된 횟수: {resetCount}</p>
+            <p>정답률: {((score / totalAttempts) * 100).toFixed(2)}%</p>
+          </div>
+        )}
   <div className="quiz-content">
-    {gameStarted ? currentQuestion : (score === quizData.length ? "-완- 당신은 사자성어 왕!!!" : <div>스타트 버튼을 누르면 게임이 시작됩니다.</div>)}
+    {gameStarted ? currentQuestion : (score === quizData.length ? "-완- 당신은 사자성어 왕!!!" : <div>스타트 버튼을 누르면 게임이 시작됩니다. <br /> *클리어조건: 10점</div>)}
     <div className="score-box">SCORE: {score}점</div>
   </div>
 </div>  
