@@ -195,17 +195,17 @@ const QuizGame = () => {
   {!gameStarted && score === 5 && (
           <div className="results-display">
             <p>사자성어 클리어!!</p>
+            <p>-총 소요 시간: {elapsedTime}</p> {/* 소요 시간 추가 */}
             <p>-총 도전한 문제수: {totalAttempts} 문제</p>
             <p>-총 정답 수: {score} 문제</p>
             <p>-총 오답 수: {resetCount} 문제</p>
             <p>-정답률: {((score / totalAttempts) * 100).toFixed(2)}%</p>
-            <p>-총 소요 시간: {elapsedTime}</p> {/* 소요 시간 추가 */}
           </div>
         )}
   <div className="quiz-content">
   {gameStarted ? currentQuestion : score === 5 ? "" : "스타트 버튼을 누르면 게임이 시작됩니다."}
   <div className="score-box" style={{ visibility: gameStarted ? 'visible' : 'hidden' }}>
-              SCORE: {score}점
+              SCORE: {score}점 
             </div>
   </div>
 </div>  
