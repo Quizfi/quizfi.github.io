@@ -46,6 +46,11 @@
   text-align: center;
 }
 
+.results-display{
+  line-height: 1; /* 행간 조정 */
+  font-size: 21px; /* 텍스트 크기 조정 */
+}
+
 /* 상단 색상 띠 */
 .quiz-box-header {
   position: absolute;

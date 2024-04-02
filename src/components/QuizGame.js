@@ -22,6 +22,9 @@ const QuizGame = () => {
   const answerInputRef = useRef(null);
   const containerRef = useRef(null);
   const navigate = useNavigate();
+  const [startTime, setStartTime] = useState(null); // 게임 시작 시간
+  const [endTime, setEndTime] = useState(null); // 게임 종료 시간
+  const [elapsedTime, setElapsedTime] = useState(''); // 소요 시간 문자열
 
   useEffect(() => {
     let savedScrollPosition = 0;
@@ -94,6 +97,9 @@ const QuizGame = () => {
           setGameStarted(false);
           setCurrentQuestion('-완- 사자성어 클리어!');
           // 추가적으로 사용자에게 성공 메시지 표시할 수 있음
+          setAnswerFeedback("축하합니다! 🎉🥳"); // 축하 메시지 설정
+          setShowFeedback(true); // 정답 확인 박스에 메시지를 보여주기 위해
+          setEndTime(new Date()); // 게임 종료 시간 기록
         }
         return updatedScore;
       });
@@ -115,6 +121,7 @@ const QuizGame = () => {
     setSelectedQuestions2([]);
     setSelectedQuestionsIndex(1);
     selectNextQuestion();
+    setStartTime(new Date());
   };
 
   const handleEnterKeyPress = (event) => {
@@ -137,6 +144,16 @@ const QuizGame = () => {
         answerInputRef.current.focus();
       }
     }, [gameStarted, currentQuestion]);
+
+      // 게임 종료 시 소요된 시간 계산
+  useEffect(() => {
+    if (startTime && endTime) {
+      const duration = endTime - startTime; // 밀리초 단위
+      const seconds = Math.floor((duration / 1000) % 60);
+      const minutes = Math.floor((duration / (1000 * 60)) % 60);
+      setElapsedTime(`${minutes}분 ${seconds}초`);
+    }
+  }, [startTime, endTime]); // endTime이 변경될 때마다 실행
 
   const handleInputChange = (event) => {
     setAnswer(event.target.value);
@@ -177,16 +194,19 @@ const QuizGame = () => {
   </div>
   {!gameStarted && score === 5 && (
           <div className="results-display">
-            <p>-완- 사자성어 클리어!</p>
-            <p>총 도전한 문제수: {totalAttempts}</p>
-            <p>총 정답 수: {score}</p>
-            <p>총 초기화된 횟수: {resetCount}</p>
-            <p>정답률: {((score / totalAttempts) * 100).toFixed(2)}%</p>
+            <p>사자성어 클리어!!</p>
+            <p>-총 도전한 문제수: {totalAttempts} 문제</p>
+            <p>-총 정답 수: {score} 문제</p>
+            <p>-총 오답 수: {resetCount} 문제</p>
+            <p>-정답률: {((score / totalAttempts) * 100).toFixed(2)}%</p>
+            <p>-총 소요 시간: {elapsedTime}</p> {/* 소요 시간 추가 */}
           </div>
         )}
   <div className="quiz-content">
-    {gameStarted ? currentQuestion : (score === quizData.length ? "-완- 당신은 사자성어 왕!!!" : <div>스타트 버튼을 누르면 게임이 시작됩니다. <br /> (목표점수: 10점)</div>)}
-    <div className="score-box">SCORE: {score}점</div>
+  {gameStarted ? currentQuestion : score === 5 ? "" : "스타트 버튼을 누르면 게임이 시작됩니다."}
+  <div className="score-box" style={{ visibility: gameStarted ? 'visible' : 'hidden' }}>
+              SCORE: {score}점
+            </div>
   </div>
 </div>  
         {/* 입력 박스 및 ENTER 버튼 */}
@@ -216,7 +236,7 @@ const QuizGame = () => {
         </div>
   
         {/* '정답 확인' 및 '다음 문제' 박스 (조건부 렌더링) */}
-        {showFeedback && (
+        {showFeedback && gameStarted && score < 5 && (
           <div className="feedback-overlay">
             <div className="box answer-check-box">
               {isCorrect === false && <div>❌오답입니다. {answerFeedback}</div>}
@@ -225,19 +245,28 @@ const QuizGame = () => {
             </div>
             <div
          className={`box next-question-box ${!gameStarted ? 'disabled' : ''}`}
-        onClick={handleNextQuestionClick}
->
+        onClick={handleNextQuestionClick}>
   <FontAwesomeIcon icon={faArrowRight} size="2x" /> {/* 화살표 아이콘 사용 */}
 </div>
           </div>
         )}
   
-        {/* 게임 시작 버튼 */}
-        {!gameStarted && (
-          <div className="box start-box" onClick={handleStartGame}>
-            START
+      {/* 게임 시작 버튼 (목표점수에 도달하면 숨김) */}
+      {!gameStarted && score < 5 && (
+        <div className="box start-box" onClick={handleStartGame}>START</div>
+      )}
+
+
+
+{!gameStarted && score === 5 && (
+        <div className="feedback-overlay">
+          <div className="box answer-check-box">
+            {answerFeedback}
           </div>
-        )}
+        </div>
+      )}
+
+
       </div>
     </div>
   );
