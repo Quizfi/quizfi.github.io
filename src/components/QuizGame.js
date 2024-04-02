@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './QuizGame.css';
 import quizData from '../db/quizData.json';
@@ -42,46 +42,61 @@ const QuizGame = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-
-
-  const selectNextQuestion = useCallback(() => {
-    const selectedQuestions = selectedQuestionsIndex === 1 ? selectedQuestions1 : selectedQuestions2;
-    const setSelectedQuestions = selectedQuestionsIndex === 1 ? setSelectedQuestions1 : setSelectedQuestions2;
-
-    if (score >= 10) {
-      // 게임 성공 종료 조건
-      setGameStarted(false);
-      setCurrentQuestion('-완- 사자성어 클리어!');
-      return;
+  const selectNextQuestion = () => {
+    let currentQuestions = selectedQuestionsIndex === 1 ? selectedQuestions1 : selectedQuestions2;
+    let otherQuestions = selectedQuestionsIndex === 1 ? selectedQuestions2 : selectedQuestions1;
+    const updateQuestions = selectedQuestionsIndex === 1 ? setSelectedQuestions1 : setSelectedQuestions2;
+  
+    // 사용 가능한 문제 인덱스들을 찾습니다.
+    let availableIndexes = quizData
+      .map((_, index) => index)
+      .filter(index => !currentQuestions.includes(index) && !otherQuestions.includes(index));
+  
+    if (availableIndexes.length === 0) {
+      // 모든 문제가 사용되었다면, 현재 문제 배열을 초기화합니다.
+      updateQuestions([]);
+      // 사용 가능한 인덱스를 다시 계산합니다.
+      availableIndexes = quizData
+        .map((_, index) => index)
+        .filter(index => !otherQuestions.includes(index));
     }
-
-    let randomIndex;
-    do {
-      randomIndex = Math.floor(Math.random() * quizData.length);
-    } while (selectedQuestions.includes(randomIndex));
-
-    setSelectedQuestions(prev => [...prev, randomIndex]);
+  
+    // 사용 가능한 문제 중 랜덤으로 하나를 선택합니다.
+    const randomIndex = availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
+  
+    // 선택된 문제 인덱스를 현재 문제 배열에 추가합니다.
+    updateQuestions(prev => [...prev, randomIndex]);
+  
+    // 새로운 문제를 설정합니다.
     setCurrentQuestion(quizData[randomIndex].question);
     setAnswer('');
     setIsCorrect(null);
-    answerInputRef.current && (answerInputRef.current.disabled = false);
-  }, [selectedQuestions1, selectedQuestions2, selectedQuestionsIndex, score]);
+  };
 
   const checkAnswer = () => {
     if (!gameStarted || answer.trim().length === 0) return;
-
+  
     const currentQuiz = quizData.find((quiz) => quiz.question === currentQuestion);
     if (!currentQuiz) {
       console.error('현재 질문을 찾을 수 없습니다.');
       return;
     }
-
+  
     const correctAnswer = currentQuiz.correctAnswer.join('');
     setTotalAttempts(prev => prev + 1);
-
+  
     if (answer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
       setIsCorrect(true);
-      setScore(prevScore => prevScore + 1);
+      setScore(prevScore => {
+        const updatedScore = prevScore + 1;
+        // 점수가 10점에 도달하면 게임 종료
+        if (updatedScore === 5) {
+          setGameStarted(false);
+          setCurrentQuestion('-완- 사자성어 클리어!');
+          // 추가적으로 사용자에게 성공 메시지 표시할 수 있음
+        }
+        return updatedScore;
+      });
     } else {
       setIsCorrect(false);
       setScore(0); // 점수 초기화
@@ -160,7 +175,7 @@ const QuizGame = () => {
         <span className="control-button"></span>
     </div>
   </div>
-  {!gameStarted && score === 10 && (
+  {!gameStarted && score === 5 && (
           <div className="results-display">
             <p>-완- 사자성어 클리어!</p>
             <p>총 도전한 문제수: {totalAttempts}</p>
@@ -170,7 +185,7 @@ const QuizGame = () => {
           </div>
         )}
   <div className="quiz-content">
-    {gameStarted ? currentQuestion : (score === quizData.length ? "-완- 당신은 사자성어 왕!!!" : <div>스타트 버튼을 누르면 게임이 시작됩니다. <br /> *클리어조건: 10점</div>)}
+    {gameStarted ? currentQuestion : (score === quizData.length ? "-완- 당신은 사자성어 왕!!!" : <div>스타트 버튼을 누르면 게임이 시작됩니다. <br /> (목표점수: 10점)</div>)}
     <div className="score-box">SCORE: {score}점</div>
   </div>
 </div>  
