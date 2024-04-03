@@ -25,6 +25,8 @@ const QuizGame = () => {
   const [startTime, setStartTime] = useState(null); // 게임 시작 시간
   const [endTime, setEndTime] = useState(null); // 게임 종료 시간
   const [elapsedTime, setElapsedTime] = useState(''); // 소요 시간 문자열
+  const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
+
 
   useEffect(() => {
     let savedScrollPosition = 0;
@@ -90,6 +92,7 @@ const QuizGame = () => {
   
     if (answer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
       setIsCorrect(true);
+      setTotalCorrectAnswers(prev => prev + 1); // 전체 정답 수 업데이트
       setScore(prevScore => {
         const updatedScore = prevScore + 1;
         // 점수가 10점에 도달하면 게임 종료
@@ -149,6 +152,11 @@ const handleRestartGame = () => {
   setSelectedQuestionsIndex(1);
   setAnswerFeedback('');
   setShowFeedback(false);
+  setTotalCorrectAnswers(0); // 추가: 전체 정답 수도 리셋
+  setAnswer(''); // 추가: 입력 필드 초기화
+  setStartTime(null); // 시작 시간 초기화
+  setEndTime(null); // 종료 시간 초기화
+  setElapsedTime(''); // 소요 시간 문자열 초기화
   // 여기에 게임을 초기 상태로 리셋하는 로직 추가
 };
 
@@ -167,7 +175,7 @@ const shareOnKakao = () => {
       objectType: 'feed',
       content: {
         title: 'Quizfy 게임 공유하기',
-        description: `정답률: ${((score / totalAttempts) * 100).toFixed(2)}%, 소요 시간: ${elapsedTime}`,
+        description: `정답률: ${((totalCorrectAnswers / totalAttempts) * 100).toFixed(2)}%, 도전 시간: ${elapsedTime}`,
         imageUrl: 'https://quizfi.github.io/saja',
         link: {
           mobileWebUrl: 'https://quizfi.github.io/saja',
@@ -246,11 +254,11 @@ const shareOnKakao = () => {
   {!gameStarted && score === 5 && (
           <div className="results-display">
             <p>사자성어 클리어!!</p>
-            <p>-총 소요 시간: {elapsedTime}</p> {/* 소요 시간 추가 */}
+            <p>-총 도전 시간: {elapsedTime}</p> {/* 소요 시간 추가 */}
             <p>-총 도전한 문제수: {totalAttempts} 문제</p>
-            <p>-총 정답 수: {score} 문제</p>
+            <p>-총 정답 수: {totalCorrectAnswers} 문제</p>
             <p>-총 오답 수: {resetCount} 문제</p>
-            <p>-정답률: {((score / totalAttempts) * 100).toFixed(2)}%</p>
+            <p>-정답률: {((totalCorrectAnswers / totalAttempts) * 100).toFixed(2)}%</p>
 <button className="restart-button" onClick={handleRestartGame}>재도전하기</button>
 <button className="share-button" onClick={shareOnKakao}>공유하기</button>
 <button className="home-button" onClick={() => navigate('/')}>홈으로</button>
