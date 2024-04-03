@@ -138,6 +138,57 @@ const QuizGame = () => {
     }
   };
 
+  // 게임 재시작 함수
+const handleRestartGame = () => {
+  setGameStarted(false);
+  setScore(0);
+  setTotalAttempts(0);
+  setResetCount(0);
+  setSelectedQuestions1([]);
+  setSelectedQuestions2([]);
+  setSelectedQuestionsIndex(1);
+  setAnswerFeedback('');
+  setShowFeedback(false);
+  // 여기에 게임을 초기 상태로 리셋하는 로직 추가
+};
+
+useEffect(() => {
+  // Kakao SDK 스크립트 로드 확인
+  if (window.Kakao && !window.Kakao.isInitialized()) {
+    // Kakao SDK 초기화
+    window.Kakao.init('f3438471c74bd17d21dabd6e2009c64c');
+  }
+}, []);
+
+const shareOnKakao = () => {
+  // Kakao 공유 기능이 준비되었는지 확인
+  if (window.Kakao && window.Kakao.isInitialized()) {
+    window.Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: 'Quizfy 게임 공유하기',
+        description: `정답률: ${((score / totalAttempts) * 100).toFixed(2)}%, 소요 시간: ${elapsedTime}`,
+        imageUrl: 'https://quizfi.github.io/saja',
+        link: {
+          mobileWebUrl: 'https://quizfi.github.io/saja',
+          webUrl: 'https://quizfi.github.io/saja'
+        },
+      },
+      buttons: [
+        {
+          title: '게임하기',
+          link: {
+            mobileWebUrl: 'https://quizfi.github.io/saja',
+            webUrl: 'https://quizfi.github.io/saja'
+          },
+        },
+      ],
+    });
+  } else {
+    console.error('Kakao SDK not loaded or initialized');
+  }
+}
+
     // 게임 시작 및 새로운 문제 선택 시 정답 입력 박스에 자동 포커스
     useEffect(() => {
       if (gameStarted && answerInputRef.current) {
@@ -200,6 +251,9 @@ const QuizGame = () => {
             <p>-총 정답 수: {score} 문제</p>
             <p>-총 오답 수: {resetCount} 문제</p>
             <p>-정답률: {((score / totalAttempts) * 100).toFixed(2)}%</p>
+<button className="restart-button" onClick={handleRestartGame}>재도전하기</button>
+<button className="share-button" onClick={shareOnKakao}>공유하기</button>
+<button className="home-button" onClick={() => navigate('/')}>홈으로</button>
           </div>
         )}
   <div className="quiz-content">

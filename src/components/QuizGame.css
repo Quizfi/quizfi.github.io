@@ -233,6 +233,38 @@ body {
     clip-path: polygon(0 0, 100% 0, 100% 70%, 0% 100%); /* 원하는 모양으로 설정 */
   }
 
+  .restart-button, .share-button {
+    padding: 10px 20px;
+    margin-top: 120px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .restart-button {
+    margin-right: 10px;
+    background-color: #5c65eb; /* Green */
+    color: white;
+  }
+  
+  .share-button {
+    margin-right: 10px;
+    background-color: #fffb00; /* Blue */
+    color: rgb(0, 0, 0);
+  }
+
+  .home-button {
+    padding: 10px 20px;
+    margin-top: 20px; /* 조정이 필요할 수 있음 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #ff5656; /* 색상 예시 */
+    color: white;
+  }
+
 
   @media (max-width: 768px) {
      /* HEADER 박스, QUIZBOX, .answer-check-box 스타일 조정 */
@@ -251,6 +283,14 @@ body {
       height: 220px;
       padding-top: 15px;
       margin-top: 60px;
+    }
+
+    .results-display{
+      padding-top: 15px;
+      line-height: 1; /* 행간 조정 */
+      font-size: 15px; /* 텍스트 크기 조정 */
+      font-weight: bold;
+      text-align: center;
     }
   
     /* .start-box 스타일 조정 */
@@ -320,4 +360,36 @@ body {
       min-width: 0; /* flex 항목이 줄어들 수 있도록 설정 */
       font-size: 15px;
     }
+
+    .restart-button, .share-button {
+      padding: 10px 20px;
+      margin-top: 100px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .restart-button {
+      margin-right: 10px;
+      background-color: #5c65eb; /* Green */
+      color: white;
+    }
+    
+    .share-button {
+      margin-right: 10px;
+      background-color: #fffb00; /* Blue */
+      color: rgb(0, 0, 0);
+    }
+
+    .home-button {
+      padding: 10px 20px;
+      margin-top: 20px; /* 조정이 필요할 수 있음 */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      background-color: #ff5656; /* 색상 예시 */
+      color: white;
+    }  
 }
