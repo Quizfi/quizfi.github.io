@@ -284,7 +284,7 @@ const shareOnKakao = () => {
   {gameStarted ? currentQuestion : 
     score === 10 ? "" : (
       <>
-        "스타트 버튼을 누르면 게임이 시작됩니다."
+        스타트 버튼을 누르면 게임이 시작됩니다.
         <br />
         <span style={{ fontSize: '0.7em' }}>(목표점수: 10점 / 오답 입력 시 점수 초기화)</span>
       </>
