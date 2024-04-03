@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './QuizGame.css';
 import quizData from '../db/quizData.json';
@@ -13,156 +13,230 @@ const QuizGame = () => {
   const [answer, setAnswer] = useState('');
   const [isCorrect, setIsCorrect] = useState(null);
   const [score, setScore] = useState(0);
+  const [totalAttempts, setTotalAttempts] = useState(0);
+  const [resetCount, setResetCount] = useState(0);
   const [selectedQuestions1, setSelectedQuestions1] = useState([]);
   const [selectedQuestions2, setSelectedQuestions2] = useState([]);
   const [selectedQuestionsIndex, setSelectedQuestionsIndex] = useState(1);
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [showFeedback, setShowFeedback] = useState(false);
   const answerInputRef = useRef(null);
-  const correctSound = useRef(new Audio('/correct.mp3'));
-  const containerRef = useRef(null); // 여기서 containerRef를 정의합니다.
+  const containerRef = useRef(null);
+  const navigate = useNavigate();
+  const [startTime, setStartTime] = useState(null); // 게임 시작 시간
+  const [endTime, setEndTime] = useState(null); // 게임 종료 시간
+  const [elapsedTime, setElapsedTime] = useState(''); // 소요 시간 문자열
+  const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
+
+
+
 
   useEffect(() => {
-    // 스크롤 위치를 저장할 변수
     let savedScrollPosition = 0;
-    // 화면 높이를 저장할 변수
     let originalHeight = window.innerHeight;
-  
+ 
     const handleResize = () => {
       const newHeight = window.innerHeight;
-      // 화면 높이가 줄어들 경우, 키보드가 활성화된 것으로 간주
       if (newHeight < originalHeight) {
-        // 현재 스크롤 위치 저장
         savedScrollPosition = window.scrollY;
-        // 화면을 조정하는 로직
         window.scrollTo({ top: 60, behavior: 'auto' });
       } else {
-        // 키보드가 비활성화되면 원래 스크롤 위치로 복원
         window.scrollTo({ top: savedScrollPosition, behavior: 'auto' });
       }
       originalHeight = newHeight;
     };
-  
+ 
     window.addEventListener('resize', handleResize);
-  
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
 
-  const playCorrectSound = useCallback(() => {
-    correctSound.current.currentTime = 0;
-    correctSound.current.play();
-  }, []);
-
-  const playIncorrectSound = useCallback(() => {
-    const incorrectSound = new Audio('/incorrect.mp3');
-    incorrectSound.currentTime = 0;
-    incorrectSound.play();
-  }, []);
-
-
-  const selectNextQuestion = useCallback(() => {
-    const selectedQuestions = selectedQuestionsIndex === 1 ? selectedQuestions1 : selectedQuestions2;
-    const setSelectedQuestions = selectedQuestionsIndex === 1 ? setSelectedQuestions1 : setSelectedQuestions2;
-
-    if (selectedQuestions.length === quizData.length) {
-      setGameStarted(false);
-      setCurrentQuestion('-완- 당신은 사자성어 왕!!');
-      return;
+  const selectNextQuestion = () => {
+    let currentQuestions = selectedQuestionsIndex === 1 ? selectedQuestions1 : selectedQuestions2;
+    let otherQuestions = selectedQuestionsIndex === 1 ? selectedQuestions2 : selectedQuestions1;
+    const updateQuestions = selectedQuestionsIndex === 1 ? setSelectedQuestions1 : setSelectedQuestions2;
+ 
+    // 사용 가능한 문제 인덱스들을 찾습니다.
+    let availableIndexes = quizData
+      .map((_, index) => index)
+      .filter(index => !currentQuestions.includes(index) && !otherQuestions.includes(index));
+ 
+    if (availableIndexes.length === 0) {
+      // 모든 문제가 사용되었다면, 현재 문제 배열을 초기화합니다.
+      updateQuestions([]);
+      // 사용 가능한 인덱스를 다시 계산합니다.
+      availableIndexes = quizData
+        .map((_, index) => index)
+        .filter(index => !otherQuestions.includes(index));
     }
-
-    let randomIndex;
-    do {
-      randomIndex = Math.floor(Math.random() * quizData.length);
-    } while (selectedQuestions.includes(randomIndex));
-
-    setSelectedQuestions([...selectedQuestions, randomIndex]);
+ 
+    // 사용 가능한 문제 중 랜덤으로 하나를 선택합니다.
+    const randomIndex = availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
+ 
+    // 선택된 문제 인덱스를 현재 문제 배열에 추가합니다.
+    updateQuestions(prev => [...prev, randomIndex]);
+ 
+    // 새로운 문제를 설정합니다.
     setCurrentQuestion(quizData[randomIndex].question);
     setAnswer('');
-    answerInputRef.current.disabled = false;
     setIsCorrect(null);
-  }, [selectedQuestions1, selectedQuestions2, selectedQuestionsIndex]);
-
-  const handleInputChange = (event) => {
-    setAnswer(event.target.value);
   };
 
+
   const checkAnswer = () => {
-    if (!gameStarted || answer.trim().length === 0) return; // 게임이 시작되지 않았거나 입력 필드가 비어있으면 반환
-  
-    const currentQuiz = quizData.find((item) => item.question === currentQuestion);
+    if (!gameStarted || answer.trim().length === 0) return;
+ 
+    const currentQuiz = quizData.find((quiz) => quiz.question === currentQuestion);
     if (!currentQuiz) {
       console.error('현재 질문을 찾을 수 없습니다.');
       return;
     }
-  
+ 
     const correctAnswer = currentQuiz.correctAnswer.join('');
+    setTotalAttempts(prev => prev + 1);
+ 
     if (answer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
       setIsCorrect(true);
-      setScore(score + 1);
-      playCorrectSound();
-      setShowFeedback(true); // 정답일 때 피드백 박스를 표시합니다.
+      setTotalCorrectAnswers(prev => prev + 1); // 전체 정답 수 업데이트
+      setScore(prevScore => {
+        const updatedScore = prevScore + 1;
+        // 점수가 10점에 도달하면 게임 종료
+        if (updatedScore === 10) {
+          setGameStarted(false);
+          setCurrentQuestion('-완- 사자성어 클리어!');
+          // 추가적으로 사용자에게 성공 메시지 표시할 수 있음
+          setAnswerFeedback("🎉축하합니다! 🥳"); // 축하 메시지 설정
+          setShowFeedback(true); // 정답 확인 박스에 메시지를 보여주기 위해
+          setEndTime(new Date()); // 게임 종료 시간 기록
+        }
+        return updatedScore;
+      });
     } else {
       setIsCorrect(false);
-      playIncorrectSound();
-      const formattedCorrectAnswer = currentQuiz.correctAnswer.join('');
-      setAnswerFeedback(`(정답: ${formattedCorrectAnswer})`);
-      setShowFeedback(true); // 오답일 때 피드백 박스를 표시합니다.
+      setScore(0); // 점수 초기화
+      setResetCount(prev => prev + 1); // 오답 횟수 증가
+      setAnswerFeedback(`(정답: ${correctAnswer})`);
     }
+    setShowFeedback(true);
   };
 
-  useEffect(() => {
-    if (score === quizData.length) {
-      setGameStarted(false);
-      setCurrentQuestion('-완- 당신은 사자성어 왕!!');
-    }
-  }, [score]);
-
-  useEffect(() => {
-    if (selectedQuestionsIndex === 1) {
-      if (selectedQuestions1.length === quizData.length) {
-        setSelectedQuestionsIndex(2);
-      }
-    } else {
-      if (selectedQuestions2.length === quizData.length) {
-        setSelectedQuestionsIndex(1);
-      }
-    }
-  }, [selectedQuestions1, selectedQuestions2, selectedQuestionsIndex]);
 
   const handleStartGame = () => {
     setGameStarted(true);
     setScore(0);
+    setTotalAttempts(0);
+    setResetCount(0);
+    setSelectedQuestions1([]);
+    setSelectedQuestions2([]);
+    setSelectedQuestionsIndex(1);
     selectNextQuestion();
+    setStartTime(new Date());
   };
+
 
   const handleEnterKeyPress = (event) => {
     if (event.key === 'Enter' && gameStarted) {
       checkAnswer();
     }
   };
-  
+
+
   const handleNextQuestionClick = () => {
     if (isCorrect !== null || !gameStarted) {
       selectNextQuestion();
       setIsCorrect(null);
-      setShowFeedback(false); // 다음 문제로 넘어갈 때 피드백 박스를 숨깁니다.
+      setShowFeedback(false);
     }
   };
 
-  useEffect(() => {
-    if (gameStarted) {
-      answerInputRef.current.focus();
-    }
-  }, [gameStarted, currentQuestion]);
 
-  const navigate = useNavigate();
+  // 게임 재시작 함수
+const handleRestartGame = () => {
+  setGameStarted(false);
+  setScore(0);
+  setTotalAttempts(0);
+  setResetCount(0);
+  setSelectedQuestions1([]);
+  setSelectedQuestions2([]);
+  setSelectedQuestionsIndex(1);
+  setAnswerFeedback('');
+  setShowFeedback(false);
+  setTotalCorrectAnswers(0); // 추가: 전체 정답 수도 리셋
+  setAnswer(''); // 추가: 입력 필드 초기화
+  setStartTime(null); // 시작 시간 초기화
+  setEndTime(null); // 종료 시간 초기화
+  setElapsedTime(''); // 소요 시간 문자열 초기화
+  // 여기에 게임을 초기 상태로 리셋하는 로직 추가
+};
+
+
+useEffect(() => {
+  // Kakao SDK 스크립트 로드 확인
+  if (window.Kakao && !window.Kakao.isInitialized()) {
+    // Kakao SDK 초기화
+    window.Kakao.init('f3438471c74bd17d21dabd6e2009c64c');
+  }
+}, []);
+
+
+const shareOnKakao = () => {
+  // Kakao 공유 기능이 준비되었는지 확인
+  if (window.Kakao && window.Kakao.isInitialized()) {
+    window.Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: 'Quizfy 공유하기',
+        description: `정답률: ${((totalCorrectAnswers / totalAttempts) * 100).toFixed(2)}%, 도전 시간: ${elapsedTime}`,
+        imageUrl: 'https://gi.esmplus.com/jjumang/quizfi.png',
+        link: {
+          mobileWebUrl: 'https://quizfi.github.io/saja',
+          webUrl: 'https://quizfi.github.io/saja'
+        },
+      },
+      buttons: [
+        {
+          title: '게임하기',
+          link: {
+            mobileWebUrl: 'https://quizfi.github.io/saja',
+            webUrl: 'https://quizfi.github.io/saja'
+          },
+        },
+      ],
+    });
+  } else {
+    console.error('Kakao SDK not loaded or initialized');
+  }
+}
+
+
+    // 게임 시작 및 새로운 문제 선택 시 정답 입력 박스에 자동 포커스
+    useEffect(() => {
+      if (gameStarted && answerInputRef.current) {
+        answerInputRef.current.focus();
+      }
+    }, [gameStarted, currentQuestion]);
+
+
+      // 게임 종료 시 소요된 시간 계산
+  useEffect(() => {
+    if (startTime && endTime) {
+      const duration = endTime - startTime; // 밀리초 단위
+      const seconds = Math.floor((duration / 1000) % 60);
+      const minutes = Math.floor((duration / (1000 * 60)) % 60);
+      setElapsedTime(`${minutes}분 ${seconds}초`);
+    }
+  }, [startTime, endTime]); // endTime이 변경될 때마다 실행
+
+
+  const handleInputChange = (event) => {
+    setAnswer(event.target.value);
+  };
+
 
   const goToHome = () => {
     navigate('/');
   };
+
 
   return (
     <div>
@@ -176,6 +250,7 @@ const QuizGame = () => {
         <meta name="keywords" content="사자성어, 퀴즈, 킬링타임, 도전, 게임" />
         <meta property="og:title" content="Quizfy: 사자성어 퀴즈 게임" />
         <meta property="og:description" content="Quizfy에서 사자성어 퀴즈를 즐겨보세요. 지식을 테스트하고 새로운 것을 배울 기회를 가질 수 있습니다." />
+        <meta property="og:image" content="https://gi.esmplus.com/jjumang/quizfi.png" />
         <meta property="og:url" content="https://quizfi.github.io/saja" />
         {/* 다른 SEO 관련 태그를 여기에 추가할 수 있습니다. */}
       </Helmet>
@@ -192,9 +267,32 @@ const QuizGame = () => {
         <span className="control-button"></span>
     </div>
   </div>
-  <div className="quiz-content">
-    {gameStarted ? currentQuestion : (score === quizData.length ? "-완- 당신은 사자성어 왕!!!" : <div>스타트 버튼을 누르면 게임이 시작됩니다.</div>)}
-    <div className="score-box">SCORE: {score}점</div>
+  {!gameStarted && score === 10 && (
+          <div className="results-display">
+            <p>사자성어 클리어!!</p>
+            <p>-총 도전 시간: {elapsedTime}</p> {/* 소요 시간 추가 */}
+            <p>-총 도전한 문제수: {totalAttempts} 문제</p>
+            <p>-총 정답 수: {totalCorrectAnswers} 문제</p>
+            <p>-총 오답 수: {resetCount} 문제</p>
+            <p>-정답률: {((totalCorrectAnswers / totalAttempts) * 100).toFixed(2)}%</p>
+<button className="restart-button" onClick={handleRestartGame}>재도전하기</button>
+<button className="share-button" onClick={shareOnKakao}>공유하기</button>
+<button className="home-button" onClick={() => navigate('/')}>홈으로</button>
+          </div>
+        )}
+<div className="quiz-content">
+  {gameStarted ? currentQuestion : 
+    score === 10 ? "" : (
+      <>
+        "스타트 버튼을 누르면 게임이 시작됩니다."
+        <br />
+        <span style={{ fontSize: '0.7em' }}>(목표점수: 10점 / 오답 입력 시 점수 초기화)</span>
+      </>
+    )
+  }
+  <div className="score-box" style={{ visibility: gameStarted ? 'visible' : 'hidden' }}>
+              SCORE: {score}점 / 10점
+            </div>
   </div>
 </div>  
         {/* 입력 박스 및 ENTER 버튼 */}
@@ -211,6 +309,7 @@ const QuizGame = () => {
           autoComplete="new-password" // 자동완성 비활성화
         />
 
+
         <div
           className={`box enter-box ${!gameStarted || isCorrect !== null ? 'disabled' : ''}`}
           onClick={() => {
@@ -222,9 +321,9 @@ const QuizGame = () => {
   <FontAwesomeIcon icon={faArrowUpFromBracket} />
 </div>
         </div>
-  
+ 
         {/* '정답 확인' 및 '다음 문제' 박스 (조건부 렌더링) */}
-        {showFeedback && (
+        {showFeedback && gameStarted && score < 10 && (
           <div className="feedback-overlay">
             <div className="box answer-check-box">
               {isCorrect === false && <div>❌오답입니다. {answerFeedback}</div>}
@@ -233,22 +332,32 @@ const QuizGame = () => {
             </div>
             <div
          className={`box next-question-box ${!gameStarted ? 'disabled' : ''}`}
-        onClick={handleNextQuestionClick}
->
+        onClick={handleNextQuestionClick}>
   <FontAwesomeIcon icon={faArrowRight} size="2x" /> {/* 화살표 아이콘 사용 */}
 </div>
           </div>
         )}
-  
-        {/* 게임 시작 버튼 */}
-        {!gameStarted && (
-          <div className="box start-box" onClick={handleStartGame}>
-            START
+ 
+      {/* 게임 시작 버튼 (목표점수에 도달하면 숨김) */}
+      {!gameStarted && score < 10 && (
+        <div className="box start-box" onClick={handleStartGame}>START</div>
+      )}
+
+{!gameStarted && score === 10 && (
+        <div className="feedback-overlay">
+          <div className="box answer-check-box">
+            {answerFeedback}
           </div>
-        )}
+        </div>
+      )}
+
+
+
+
       </div>
     </div>
   );
 };
+
 
 export default QuizGame;

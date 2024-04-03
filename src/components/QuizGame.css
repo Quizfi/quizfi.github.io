@@ -7,11 +7,13 @@
   align-items: center; /* 세로 중앙 정렬 */
 }
 
+
 .header h1 {
   margin: 0;
   font-size: 24px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 
 .header-title {
   font-family: 'Arial', sans-serif;
@@ -21,12 +23,14 @@
   cursor: default;
 }
 
+
 .box {
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
   vertical-align: top; /* 세로 정렬을 위해 상단으로 정렬 */
 }
+
 
 .quiz-box {
   position: relative;
@@ -41,10 +45,20 @@
   box-shadow: 0 6px 8px rgba(27, 27, 27, 0.3); /* 호버 시 그림자 변경 */
 }
 
+
 .quiz-content {
   padding-top: 30px; /* 헤더의 높이와 동그라미 버튼을 고려한 여백 */
   text-align: center;
 }
+
+
+.results-display{
+  line-height: 1; /* 행간 조정 */
+  font-size: 21px; /* 텍스트 크기 조정 */
+  font-weight: bold;
+  text-align: center;
+}
+
 
 /* 상단 색상 띠 */
 .quiz-box-header {
@@ -57,12 +71,14 @@
   border-radius: 10px 10px 0 0; /* 상단 모서리만 둥글게 */
 }
 
+
 /* 왼쪽에 버튼 배치하기 위한 컨테이너 */
 .controls-container {
   position: absolute;
   top: -5px; /* 버튼이 색상 띠 중앙에 오도록 조정 */
   left: 20px; /* 색상 띠의 왼쪽 끝에서부터의 간격 */
 }
+
 
 /* 컨트롤 버튼 */
 .control-button {
@@ -73,6 +89,8 @@
   display: inline-block;
   background-color: #ffffff; /* 버튼 색상 */
 }
+
+
 
 
 .score-box {
@@ -86,16 +104,19 @@
   transform: translateX(-50%); /* X축으로 -50% 이동시켜 실제 중앙에 위치하도록 조정합니다. */
   color: #ff5733;
   text-align: center;
-  width: 150px;
+  width: 200x;
   height: 50px; /* 필요에 따라 조정 */
   font-size: 20px;
   font-weight: bold;
 }
 
+
 .answer-input-box,
 .enter-box{
   display: inline-block; /* 가로로 정렬 */
 }
+
+
 
 
 .box-wrapper {
@@ -106,16 +127,20 @@
 }
 
 
+
+
 .answer-input-box {
   display: inline-block; /* 가로로 정렬 */
   background-color: #f0f0f0;
   text-align: center; /* 가운데 정렬 */
-  width: 340px; 
+  width: 340px;
   height: 10px;
   margin-right: 10px; /* 간격 조정 */
   border: none; /* 테두리 제거 */
   font-size: 20px;
 }
+
+
 
 
 .enter-box {
@@ -131,14 +156,18 @@
   background-color: #463be6;
 }
 
+
 .enter-box i {
   font-size: 15px; /* 아이콘 크기 다시 조정 */
 }
+
 
  /* QuizGame.css에 추가 */
 .hidden {
   display: none;
 }
+
+
 
 
 .answer-check-box {
@@ -156,9 +185,13 @@
 }
 
 
+
+
 .quiz-game-container {
   position: relative; /* 질문 박스를 기준으로 위치 설정 */
 }
+
+
 
 
 .start-box {
@@ -181,6 +214,8 @@
 }
 
 
+
+
 .next-question-box {
   background-color: #000000;
   color: rgb(255, 0, 0);
@@ -201,18 +236,25 @@
 }
 
 
+
+
 .start-box {
   float: left;
 }
+
 
 .next-question-box {
   float: left;
 }
 
 
+
+
 body {
   background-color: rgb(199, 158, 247);
 }
+
+
 
 
 .background-shape {
@@ -227,6 +269,42 @@ body {
   }
 
 
+  .restart-button, .share-button {
+    padding: 10px 20px;
+    margin-top: 120px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+ 
+  .restart-button {
+    margin-right: 10px;
+    background-color: #5c65eb; /* Green */
+    color: white;
+  }
+ 
+  .share-button {
+    margin-right: 10px;
+    background-color: #fffb00; /* Blue */
+    color: rgb(0, 0, 0);
+  }
+
+
+  .home-button {
+    padding: 10px 20px;
+    margin-top: 20px; /* 조정이 필요할 수 있음 */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: #ff5656; /* 색상 예시 */
+    color: white;
+  }
+
+
+
+
   @media (max-width: 768px) {
      /* HEADER 박스, QUIZBOX, .answer-check-box 스타일 조정 */
     .header{
@@ -234,10 +312,12 @@ body {
       box-sizing: border-box; /* 패딩과 보더를 포함한 너비로 설정 */
     }
 
+
     .quiz-box, .answer-check-box {
       width: 90%; /* 화면 너비에 맞게 조정 */
       box-sizing: border-box; /* 패딩과 보더를 포함한 너비로 설정 */
     }
+
 
     .quiz-box{
       font-size: 20px;
@@ -245,7 +325,16 @@ body {
       padding-top: 15px;
       margin-top: 60px;
     }
-  
+
+
+    .results-display{
+      padding-top: 15px;
+      line-height: 1; /* 행간 조정 */
+      font-size: 15px; /* 텍스트 크기 조정 */
+      font-weight: bold;
+      text-align: center;
+    }
+ 
     /* .start-box 스타일 조정 */
     .start-box {
       width: 90.5%; /* 화면 너비에 맞게 조정 */
@@ -255,6 +344,7 @@ body {
       font-size: 30px;
       height: 50px; /* 높이를 60px로 설정, 필요에 따라 조정 */
     }
+
 
     .next-question-box{
       font-size: 15px;
@@ -273,12 +363,15 @@ body {
 }
 
 
+
+
   @media (max-width: 768px) {
     .box-wrapper {
       display: flex; /* Flex 컨테이너 설정 */
       position: relative;
       flex-wrap: nowrap; /* 요소들이 줄바꿈되지 않도록 설정 */
     }
+
 
     .answer-check-box {
       position: absolute; /* 절대 위치 설정 */
@@ -295,7 +388,8 @@ body {
       /* 필요한 경우 높이 설정 */
       z-index: 2; /* 다른 요소 위에 겹쳐 보이도록 설정 */
     }
-  
+ 
+
 
     .answer-input-box {
       width: 50%; /* 8의 비율로 너비를 설정 */
@@ -313,4 +407,38 @@ body {
       min-width: 0; /* flex 항목이 줄어들 수 있도록 설정 */
       font-size: 15px;
     }
+
+
+    .restart-button, .share-button {
+      padding: 10px 20px;
+      margin-top: 100px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+   
+    .restart-button {
+      margin-right: 10px;
+      background-color: #5c65eb; /* Green */
+      color: white;
+    }
+   
+    .share-button {
+      margin-right: 10px;
+      background-color: #fffb00; /* Blue */
+      color: rgb(0, 0, 0);
+    }
+
+
+    .home-button {
+      padding: 10px 20px;
+      margin-top: 20px; /* 조정이 필요할 수 있음 */
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      background-color: #ff5656; /* 색상 예시 */
+      color: white;
+    }  
 }
