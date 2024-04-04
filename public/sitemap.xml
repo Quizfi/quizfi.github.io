@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <url>
-      <loc>https://quizfi.github.io/</loc>
-      <lastmod>2024-04-03</lastmod>
+      <loc>https://quizkiwi.netlify.app/</loc>
+      <lastmod>2024-04-04</lastmod>
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
    </url>
    <url>
-      <loc>https://quizfi.github.io/saja</loc>
-      <lastmod>2024-04-03</lastmod>
+      <loc>https://quizkiwi.netlify.app/saja</loc>
+      <lastmod>2024-04-04</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.8</priority>
    </url>
