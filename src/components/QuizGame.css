@@ -1,5 +1,5 @@
 .header {
-  background-color: #faf5cc;
+  background-color: #e2d46a;
   color: #000000;
   padding: 10px 20px;
   display: flex; /* Flexbox를 적용 */
@@ -66,7 +66,7 @@
   top: 0;
   left: 0;
   right: 0;
-  background-color: #71a7e0; /* 예시 색상 */
+  background-color: #e2d46a; /* 예시 색상 */
   height: 30px;
   border-radius: 10px 10px 0 0; /* 상단 모서리만 둥글게 */
 }
@@ -195,7 +195,7 @@
 
 
 .start-box {
-  background-color: #b1adad;
+  background-color: #070707;
   color: rgb(255, 255, 255);
   width: 660px; /* 박스의 고정된 너비 */
   height: 20px; /* 박스의 고정된 높이 */
@@ -251,7 +251,7 @@
 
 
 body {
-  background-color: rgb(199, 158, 247);
+  background-color: #8bb857
 }
 
 
@@ -263,7 +263,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #b074d3; /* 배경색 설정 */
+    background-color: rgb(199, 158, 247);
     z-index: -1; /* 다른 요소 위에 오지 않도록 설정 */
     clip-path: polygon(0 0, 100% 0, 100% 70%, 0% 100%); /* 원하는 모양으로 설정 */
   }

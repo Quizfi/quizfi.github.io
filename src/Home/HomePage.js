@@ -49,17 +49,17 @@ const HomePage = () => {
   return (
     <div className="home-page">
        <Helmet>
-        <title>Quizfy</title>
+        <title>QuizKiwi</title>
         <meta name="description" content="다양하고 재밌는 퀴즈 게임들을 즐겨보세요!" />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="keywords" content="퀴즈, 사자성어, 킬링타임, 학습, 게임" />
-        <meta property="og:title" content="Quizfy: 퀴즈 게임" />
-        <meta property="og:description" content="Quizfy에서 퀴즈를 즐겨보세요. 지식을 테스트하고 새로운 것을 배울 기회를 가질 수 있습니다." />
+        <meta property="og:title" content="QuizKiwi: 퀴즈 게임" />
+        <meta property="og:description" content="QuizKiwi에서 퀴즈를 즐겨보세요. 지식을 테스트하고 새로운 것을 배울 기회를 가질 수 있습니다." />
         <meta property="og:url" content="https://quizfi.github.io/" />
         {/* 다른 SEO 관련 태그를 여기에 추가할 수 있습니다. */}
       </Helmet>
-      <h1>Quizfy</h1>
+      <h1>QuizKiwi</h1>
       <div className="box clickable" onClick={startGame}>사자성어</div>
       <div className="box">준비중</div>
       <div className="box">준비중</div>

@@ -185,7 +185,7 @@ const shareOnKakao = () => {
     window.Kakao.Link.sendDefault({
       objectType: 'feed',
       content: {
-        title: 'Quizfy 공유하기',
+        title: 'QuizKiwi 공유하기',
         description: `정답률: ${((totalCorrectAnswers / totalAttempts) * 100).toFixed(2)}%, 도전 시간: ${elapsedTime}`,
         imageUrl: 'https://gi.esmplus.com/jjumang/quizfi.png',
         link: {
@@ -243,18 +243,18 @@ const shareOnKakao = () => {
       {/* 헤더 및 소개 텍스트 */}
       <div className="header">
       <Helmet>
-        <title>Quizfy</title>
+        <title>QuizKiwi</title>
         <meta name="description" content="사자성어 퀴즈 게임을 도전해보세요!" />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="keywords" content="사자성어, 퀴즈, 킬링타임, 도전, 게임" />
-        <meta property="og:title" content="Quizfy: 사자성어 퀴즈 게임" />
-        <meta property="og:description" content="Quizfy에서 사자성어 퀴즈를 즐겨보세요. 지식을 테스트하고 새로운 것을 배울 기회를 가질 수 있습니다." />
+        <meta property="og:title" content="QuizKiwi: 사자성어 퀴즈 게임" />
+        <meta property="og:description" content="QuizKiwi에서 사자성어 퀴즈를 즐겨보세요. 지식을 테스트하고 새로운 것을 배울 기회를 가질 수 있습니다." />
         <meta property="og:image" content="https://gi.esmplus.com/jjumang/quizfi.png" />
         <meta property="og:url" content="https://quizfi.github.io/saja" />
         {/* 다른 SEO 관련 태그를 여기에 추가할 수 있습니다. */}
       </Helmet>
-  <h1 onClick={goToHome} style={{ cursor: 'pointer' }}>📚 Quizfy</h1>
+  <h1 onClick={goToHome} style={{ cursor: 'pointer' }}>🥝 QuizKiwi</h1>
   <div className="header-title">사자성어</div>
 </div>      
       <div ref={containerRef} className="quiz-game-container">

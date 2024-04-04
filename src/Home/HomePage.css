@@ -6,7 +6,7 @@
     min-height: 100vh; /* height에서 min-height로 변경 */
     padding-top: 5vh;
     color: white;
-    background-color: rgb(199, 158, 247);
+    background-color: #8bb857;
   }
  
   h1 {
@@ -20,13 +20,14 @@
     width: 150px;
     padding: 20px;
     margin: 10px 0;
-    background-color: #faf5cc;
+    background-color: #e2d46a;
     border-radius: 10px;
     text-align: center;
-    color: black;
+    color: rgb(0, 0, 0);
     font-size: 1.5rem;
     font-family: Arial, sans-serif;
     font-weight: 500;
+
   }
  
   /* clickable 클래스가 있는 .box에만 cursor: pointer; 적용 */
