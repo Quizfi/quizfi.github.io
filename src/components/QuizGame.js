@@ -180,16 +180,16 @@ const QuizGame = () => {
           )}%, 도전 시간: ${elapsedTime}`,
           imageUrl: 'https://gi.esmplus.com/jjumang/quizfi.png',
           link: {
-            mobileWebUrl: 'https://quizfi.github.io/saja',
-            webUrl: 'https://quizfi.github.io/saja',
+            mobileWebUrl: 'https://quizkiwi.netlify.app/saja',
+            webUrl: 'https://quizkiwi.netlify.app/saja',
           },
         },
         buttons: [
           {
             title: '게임하기',
             link: {
-              mobileWebUrl: 'https://quizfi.github.io/saja',
-              webUrl: 'https://quizfi.github.io/saja',
+              mobileWebUrl: 'https://quizkiwi.netlify.app/saja',
+              webUrl: 'https://quizkiwi.netlify.app/saja',
             },
           },
         ],
@@ -237,10 +237,10 @@ const QuizGame = () => {
           <meta property="og:title" content="QuizKiwi: 사자성어 퀴즈 게임" />
           <meta
             property="og:description"
-            content="QuizKiwi에서 사자성어 퀴즈를 즐겨보세요. 지식을 테스트하고 새로운 것을 배울 기회를 가질 수 있습니다."
+            content="퀴즈키위에서 사자성어 퀴즈를 즐겨보세요! 지식을 테스트하고 새로운 것을 배울 기회를 가질 수 있습니다."
           />
           <meta property="og:image" content="https://gi.esmplus.com/jjumang/quizfi.png" />
-          <meta property="og:url" content="https://quizfi.github.io/saja" />
+          <meta property="og:url" content="https://quizkiwi.netlify.app/saja" />
           {/* 다른 SEO 관련 태그를 여기에 추가할 수 있습니다. */}
         </Helmet>
         <h1 onClick={goToHome} style={{ cursor: 'pointer' }}>

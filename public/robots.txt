@@ -1,4 +1,4 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 Disallow:
-Sitemap: https://quizfi.github.io/sitemap.xml
+Sitemap: https://quizkiwi.netlify.app/sitemap.xml
