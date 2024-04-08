@@ -43,10 +43,10 @@ const HomePage = () => {
     <div className="home-page">
       <Helmet>
         <title>QuizKiwi</title>
-        <meta name="description" content="퀴즈키위!! 다양하고 재밌는 퀴즈 게임들을 즐겨보세요!" />
+        <meta name="description" content="퀴즈키위에서 다양하고 재밌는 퀴즈 게임들을 즐겨보세요!" />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="keywords" content="퀴즈, 사자성어, 킬링타임, 학습, 게임" />
+        <meta name="keywords" content="퀴즈, 사자성어, 킬링타임, 학습, 게임, 퀴즈키위" />
         <meta property="og:title" content="QuizKiwi: 퀴즈 게임" />
         <meta
           property="og:description"

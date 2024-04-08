@@ -230,10 +230,10 @@ const QuizGame = () => {
       <div className="header">
         <Helmet>
           <title>QuizKiwi</title>
-          <meta name="description" content="사자성어 퀴즈 게임을 도전해보세요!" />
+          <meta name="description" content="퀴즈키위에서 사자성어 퀴즈 게임을 도전해보세요!" />
           <meta name="robots" content="index, follow" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta name="keywords" content="사자성어, 퀴즈, 킬링타임, 도전, 게임" />
+          <meta name="keywords" content="사자성어, 고사성어, 퀴즈, 킬링타임, 도전, 게임, 퀴즈키위" />
           <meta property="og:title" content="QuizKiwi: 사자성어 퀴즈 게임" />
           <meta
             property="og:description"
