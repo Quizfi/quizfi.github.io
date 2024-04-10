@@ -1,22 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './QuizGame.css';
-import quizData from '../db/quizData.json';
+import './EmotionQuiz.css';
+import quizData from '../db/emoticonQuizData.json';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowUpFromBracket, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { Helmet } from 'react-helmet';
 
-const QuizGame = () => {
+const EmoticonQuiz = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [isCorrect, setIsCorrect] = useState(null);
   const [score, setScore] = useState(0);
   const [totalAttempts, setTotalAttempts] = useState(0);
-  const [resetCount, setResetCount] = useState(0);
   const [selectedQuestions1, setSelectedQuestions1] = useState([]);
-  const [selectedQuestions2, setSelectedQuestions2] = useState([]);
-  const [selectedQuestionsIndex, setSelectedQuestionsIndex] = useState(1);
   const [answerFeedback, setAnswerFeedback] = useState('');
   const [showFeedback, setShowFeedback] = useState(false);
   const answerInputRef = useRef(null);
@@ -26,6 +23,14 @@ const QuizGame = () => {
   const [endTime, setEndTime] = useState(null); // 게임 종료 시간
   const [elapsedTime, setElapsedTime] = useState(''); // 소요 시간 문자열
   const [totalCorrectAnswers, setTotalCorrectAnswers] = useState(0);
+  const [showResult, setShowResult] = useState(false);
+  const [currentQuestionNumber, setCurrentQuestionNumber] = useState(1);
+  const [currentHint, setCurrentHint] = useState('');
+
+
+  const formatQuestionNumber = (number) => {
+    return number.toString().padStart(2, '0');
+  };
 
   useEffect(() => {
     let savedScrollPosition = 0;
@@ -47,84 +52,75 @@ const QuizGame = () => {
   }, []);
 
   const selectNextQuestion = () => {
-    let currentQuestions = selectedQuestionsIndex === 1 ? selectedQuestions1 : selectedQuestions2;
-    let otherQuestions = selectedQuestionsIndex === 1 ? selectedQuestions2 : selectedQuestions1;
-    const updateQuestions =
-      selectedQuestionsIndex === 1 ? setSelectedQuestions1 : setSelectedQuestions2;
-
-    // 사용 가능한 문제 인덱스들을 찾습니다.
-    let availableIndexes = quizData
-      .map((_, index) => index)
-      .filter((index) => !currentQuestions.includes(index) && !otherQuestions.includes(index));
-
-    if (availableIndexes.length === 0) {
-      // 모든 문제가 사용되었다면, 현재 문제 배열을 초기화합니다.
-      updateQuestions([]);
-      // 사용 가능한 인덱스를 다시 계산합니다.
-      availableIndexes = quizData
-        .map((_, index) => index)
-        .filter((index) => !otherQuestions.includes(index));
+    const nextQuestionIndex = selectedQuestions1.findIndex(index => quizData[index].question === currentQuestion) + 1;
+    if (nextQuestionIndex < selectedQuestions1.length) {
+      // nextQuestion 변수에 할당 없이 직접 quizData에서 문제와 힌트를 가져옵니다.
+      const nextQuestion = quizData[selectedQuestions1[nextQuestionIndex]];
+      setCurrentQuestion(nextQuestion.question);
+      setCurrentHint(nextQuestion.hint); // 힌트 설정
+      setAnswer('');
+      setIsCorrect(null);
+      setShowFeedback(false);
     }
-
-    // 사용 가능한 문제 중 랜덤으로 하나를 선택합니다.
-    const randomIndex = availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
-
-    // 선택된 문제 인덱스를 현재 문제 배열에 추가합니다.
-    updateQuestions((prev) => [...prev, randomIndex]);
-
-    // 새로운 문제를 설정합니다.
-    setCurrentQuestion(quizData[randomIndex].question);
-    setAnswer('');
-    setIsCorrect(null);
   };
 
   const checkAnswer = () => {
     if (!gameStarted || answer.trim().length === 0) return;
-
+  
     const currentQuiz = quizData.find((quiz) => quiz.question === currentQuestion);
     if (!currentQuiz) {
       console.error('현재 질문을 찾을 수 없습니다.');
       return;
     }
-
-    const correctAnswer = currentQuiz.correctAnswer.join('');
+  
+    // 모든 공백 제거 후 소문자로 변환
+    const userAnswer = answer.replace(/\s+/g, '').toLowerCase();
+    const correctAnswer = currentQuiz.correctAnswer.join('').replace(/\s+/g, '').toLowerCase();
+  
     setTotalAttempts((prev) => prev + 1);
-
-    if (answer.trim().toLowerCase() === correctAnswer.trim().toLowerCase()) {
+  
+    if (userAnswer === correctAnswer) {
       setIsCorrect(true);
-      setTotalCorrectAnswers((prev) => prev + 1); // 전체 정답 수 업데이트
-      setScore((prevScore) => {
-        const updatedScore = prevScore + 1;
-        // 점수가 10점에 도달하면 게임 종료
-        if (updatedScore === 10) {
-          setGameStarted(false);
-          setCurrentQuestion('-완- 사자성어 클리어!');
-          // 추가적으로 사용자에게 성공 메시지 표시할 수 있음
-          setAnswerFeedback('🎉축하합니다! 🥳'); // 축하 메시지 설정
-          setShowFeedback(true); // 정답 확인 박스에 메시지를 보여주기 위해
-          setEndTime(new Date()); // 게임 종료 시간 기록
-        }
-        return updatedScore;
-      });
+      setTotalCorrectAnswers((prev) => prev + 1); // 정답 수 업데이트
+      setScore((prevScore) => prevScore + 1); // 점수 업데이트
     } else {
       setIsCorrect(false);
-      setScore(0); // 점수 초기화
-      setResetCount((prev) => prev + 1); // 오답 횟수 증가
-      setAnswerFeedback(`(정답: ${correctAnswer})`);
+      // 사용자에게 원래의 정답 포맷을 보여주기 위해, 모든 공백을 제거하지 않은 원본 정답을 사용
+      setAnswerFeedback(`(정답: ${currentQuiz.correctAnswer.join('')})`);
     }
     setShowFeedback(true);
+  
+    // 모든 문제가 출제되었는지 확인
+    if (totalAttempts + 1 >= 10) {
+      setEndTime(new Date()); // 게임 종료 시간 기록
+      // 모든 문제를 푼 경우 게임 종료 처리 및 결과창 표시를 위한 상태 업데이트
+      setGameStarted(false);
+      setShowResult(true); // 결과창 표시를 위한 상태를 true로 설정
+    }
   };
 
   const handleStartGame = () => {
+    // 게임 상태, 점수, 시도 횟수 등을 초기화
     setGameStarted(true);
     setScore(0);
     setTotalAttempts(0);
-    setResetCount(0);
-    setSelectedQuestions1([]);
-    setSelectedQuestions2([]);
-    setSelectedQuestionsIndex(1);
-    selectNextQuestion();
-    setStartTime(new Date());
+    setTotalCorrectAnswers(0); // 정답 수 초기화
+    setShowFeedback(false);
+  
+    // 10개의 랜덤 문제 선정
+    const randomQuestions = [];
+    while (randomQuestions.length < 10) {
+      const randomIndex = Math.floor(Math.random() * quizData.length);
+      if (!randomQuestions.includes(randomIndex)) {
+        randomQuestions.push(randomIndex);
+      }
+    }
+    setSelectedQuestions1(randomQuestions); // 첫 번째 문제 세트에 랜덤 문제 저장
+    const firstQuestion = quizData[randomQuestions[0]]; // 첫 문제 객체 가져오기
+    setCurrentQuestion(firstQuestion.question); // 첫 문제로 시작
+    setCurrentHint(firstQuestion.hint); // 첫 문제의 힌트 설정
+    setShowResult(false);
+    setStartTime(new Date()); // 게임 시작 시간 기록
   };
 
   const handleEnterKeyPress = (event) => {
@@ -138,6 +134,7 @@ const QuizGame = () => {
       selectNextQuestion();
       setIsCorrect(null);
       setShowFeedback(false);
+      setCurrentQuestionNumber(prev => prev + 1); // 문제 번호 업데이트
     }
   };
 
@@ -146,19 +143,21 @@ const QuizGame = () => {
     setGameStarted(false);
     setScore(0);
     setTotalAttempts(0);
-    setResetCount(0);
     setSelectedQuestions1([]);
-    setSelectedQuestions2([]);
-    setSelectedQuestionsIndex(1);
     setAnswerFeedback('');
     setShowFeedback(false);
-    setTotalCorrectAnswers(0); // 추가: 전체 정답 수도 리셋
-    setAnswer(''); // 추가: 입력 필드 초기화
-    setStartTime(null); // 시작 시간 초기화
-    setEndTime(null); // 종료 시간 초기화
-    setElapsedTime(''); // 소요 시간 문자열 초기화
-    // 여기에 게임을 초기 상태로 리셋하는 로직 추가
+    setTotalCorrectAnswers(0);
+    setAnswer('');
+    setStartTime(null);
+    setEndTime(null);
+    setElapsedTime('');
+    setShowResult(false); // 결과창 숨기기
+    setIsCorrect(null); // 여기에 추가
+    setCurrentQuestionNumber(1);
+    // 추가 초기화 로직 필요 시 여기에 추가
   };
+
+
 
   useEffect(() => {
     // Kakao SDK 스크립트 로드 확인
@@ -180,16 +179,16 @@ const QuizGame = () => {
           )}%, 도전 시간: ${elapsedTime}`,
           imageUrl: 'https://gi.esmplus.com/jjumang/quizfi.png',
           link: {
-            mobileWebUrl: 'https://quizkiwi.netlify.app/saja',
-            webUrl: 'https://quizkiwi.netlify.app/saja',
+            mobileWebUrl: 'https://quizkiwi.netlify.app/emoticon',
+            webUrl: 'https://quizkiwi.netlify.app/emoticon',
           },
         },
         buttons: [
           {
             title: '게임하기',
             link: {
-              mobileWebUrl: 'https://quizkiwi.netlify.app/saja',
-              webUrl: 'https://quizkiwi.netlify.app/saja',
+              mobileWebUrl: 'https://quizkiwi.netlify.app/emoticon',
+              webUrl: 'https://quizkiwi.netlify.app/emoticon',
             },
           },
         ],
@@ -230,23 +229,23 @@ const QuizGame = () => {
       <div className="header">
         <Helmet>
           <title>QuizKiwi</title>
-          <meta name="description" content="퀴즈키위에서 사자성어 퀴즈 게임을 도전해보세요!" />
+          <meta name="description" content="퀴즈키위에서 이모티콘 퀴즈 게임을 도전해보세요!" />
           <meta name="robots" content="index, follow" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <meta name="keywords" content="사자성어, 고사성어, 퀴즈, 킬링타임, 도전, 게임, 퀴즈키위, 키위, 컨텐츠" />
-          <meta property="og:title" content="QuizKiwi: 사자성어 퀴즈 게임" />
+          <meta name="keywords" content="이모티콘, 문장 만들기, 퀴즈, 킬링타임, 도전, 게임, 퀴즈키위, 키위, 컨텐츠" />
+          <meta property="og:title" content="QuizKiwi: 이모티콘 퀴즈 게임" />
           <meta
             property="og:description"
-            content="퀴즈키위에서 사자성어 퀴즈를 즐겨보세요! 지식을 테스트하고 새로운 것을 배울 기회를 가질 수 있습니다."
+            content="퀴즈키위에서 이모티콘 퀴즈를 즐겨보세요! 이모티콘 문장 만들기로 창의력을 키워보세요!!."
           />
           <meta property="og:image" content="https://gi.esmplus.com/jjumang/quizfi.png" />
-          <meta property="og:url" content="https://quizkiwi.netlify.app/saja" />
+          <meta property="og:url" content="https://quizkiwi.netlify.app/emoticon" />
           {/* 다른 SEO 관련 태그를 여기에 추가할 수 있습니다. */}
         </Helmet>
         <h1 onClick={goToHome} style={{ cursor: 'pointer' }}>
           🥝 QuizKiwi
         </h1>
-        <div className="header-title">사자성어 퀴즈</div>
+        <div className="header-title">이모티콘 퀴즈</div>
       </div>
       <div ref={containerRef} className="quiz-game-container">
         {/* 현재 문제 표시 */}
@@ -258,14 +257,12 @@ const QuizGame = () => {
               <span className="control-button"></span>
             </div>
           </div>
-          {!gameStarted && score === 10 && (
+          {showResult && (
             <div className="results-display">
-              <p>사자성어 클리어!!</p>
-              <p>-총 도전 시간: {elapsedTime}</p> {/* 소요 시간 추가 */}
-              <p>-총 도전한 문제수: {totalAttempts} 문제</p>
-              <p>-총 정답 수: {totalCorrectAnswers} 문제</p>
-              <p>-총 오답 수: {resetCount} 문제</p>
-              <p>-정답률: {((totalCorrectAnswers / totalAttempts) * 100).toFixed(2)}%</p>
+              <p>이모티콘 퀴즈 클리어!!</p>
+              <p>나의 점수: {score}</p>
+              <p>정답률: {((totalCorrectAnswers / totalAttempts) * 100).toFixed(2)}%</p>
+              <p>총 도전 시간: {elapsedTime}</p> {/* 소요 시간 추가 */}
               <button className="restart-button" onClick={handleRestartGame}>
                 재도전하기
               </button>
@@ -277,26 +274,39 @@ const QuizGame = () => {
               </button>
             </div>
           )}
+          
           <div className="quiz-content">
-            {gameStarted ? (
-              currentQuestion
-            ) : score === 10 ? (
-              ''
-            ) : (
-              <>
-                스타트 버튼을 누르면 게임이 시작됩니다.
-                <br />
-                <span style={{ fontSize: '0.7em' }}>
-                  (목표점수: 10점 / 오답 입력 시 점수 초기화)
-                </span>
-              </>
-            )}
-            <div className="score-box" style={{ visibility: gameStarted ? 'visible' : 'hidden' }}>
-              SCORE: {score}점 / 10점
-            </div>
+           {gameStarted ? (
+    currentQuestion
+  ) : !showResult && (
+    <>
+      <div className="box start-box" onClick={handleStartGame}>
+        START
+      </div>
+      <div>
+        스타트 버튼을 누르면 게임이 시작됩니다.
+        <br />
+        <span style={{ fontSize: '0.7em' }}>
+          (문제 수: 10개)
+        </span>
+      </div>
+    </>
+    
+  )
+}            
+        {gameStarted && (
+    <>
+      <div className="hint">(힌트: {currentHint})</div>
+    </>
+)}
+
+<div className="score-box" style={{ visibility: gameStarted ? 'visible' : 'hidden' }}>
+  - {formatQuestionNumber(currentQuestionNumber)} -
+</div>
           </div>
         </div>
         {/* 입력 박스 및 ENTER 버튼 */}
+        {gameStarted && !showResult && (
         <div className="box-wrapper">
           <input
             ref={answerInputRef}
@@ -321,12 +331,13 @@ const QuizGame = () => {
             <FontAwesomeIcon icon={faArrowUpFromBracket} />
           </div>
         </div>
+)}
 
         {/* '정답 확인' 및 '다음 문제' 박스 (조건부 렌더링) */}
         {showFeedback && gameStarted && score < 10 && (
           <div className="feedback-overlay">
             <div className="box answer-check-box">
-              {isCorrect === false && <div>❌오답입니다. {answerFeedback}</div>}
+              {isCorrect === false && <div>❌오답! {answerFeedback}</div>}
               {isCorrect === true && <div>🟢정답입니다.</div>}
               {isCorrect === null && <div>정답확인</div>}
             </div>
@@ -340,12 +351,11 @@ const QuizGame = () => {
         )}
 
         {/* 게임 시작 버튼 (목표점수에 도달하면 숨김) */}
-        {!gameStarted && score < 10 && (
-          <div className="box start-box" onClick={handleStartGame}>
+        {!gameStarted && !showResult && (
+        <div className="box start-box" onClick={handleStartGame}>
             START
-          </div>
-        )}
-
+        </div>
+)}
         {!gameStarted && score === 10 && (
           <div className="feedback-overlay">
             <div className="box answer-check-box">{answerFeedback}</div>
@@ -356,4 +366,4 @@ const QuizGame = () => {
   );
 };
 
-export default QuizGame;
+export default EmoticonQuiz;

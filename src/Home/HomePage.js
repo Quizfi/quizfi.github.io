@@ -13,6 +13,10 @@ const HomePage = () => {
     navigate('/saja');
   };
 
+  const startemoticonGame = () => {
+    navigate('/emoticon');
+  };
+
   const handleMouseEnterIcon = () => {
     setIsMouseOverIcon(true);
     setShowEmail(true);
@@ -46,7 +50,7 @@ const HomePage = () => {
         <meta name="description" content="퀴즈키위에서 다양하고 재밌는 퀴즈 게임들을 즐겨보세요!" />
         <meta name="robots" content="index, follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="keywords" content="퀴즈, 사자성어, 킬링타임, 학습, 게임, 퀴즈키위" />
+        <meta name="keywords" content="퀴즈, 사자성어, 이모티콘, 킬링타임, 학습, 게임, 퀴즈키위, 키위, 컨텐츠" />
         <meta property="og:title" content="QuizKiwi: 퀴즈 게임" />
         <meta
           property="og:description"
@@ -58,9 +62,10 @@ const HomePage = () => {
       </Helmet>
       <h1>QuizKiwi</h1>
       <div className="box clickable" onClick={startGame}>
-        사자성어
+        사자성어 퀴즈
       </div>
-      <div className="box">준비중</div>
+      <div className="box clickable" onClick={startemoticonGame}>
+        이모티콘 퀴즈</div>
       <div className="box">준비중</div>
       <div className="box">준비중</div>
       <div
