@@ -1,0 +1,146 @@
+.fakenews-header {
+    background-color: #e2d46a;
+    color: #000000;
+    padding: 10px 20px;
+    display: flex; /* Flexbox를 적용 */
+    justify-content: space-between; /* 자식 요소를 양 끝으로 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+  }
+  
+  
+  .fakenews-header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
+  
+  .fakenews-header-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px; /* '사자성어 퀴즈' 텍스트 크기를 조정 */
+    font-weight: 500;
+    color: #000000; /* 헤더의 배경색과 일관된 색상 적용 */
+    cursor: default;
+  }
+  
+  
+  .box {
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    vertical-align: top; /* 세로 정렬을 위해 상단으로 정렬 */
+  }
+  
+  
+  .fakenews-quiz-box {
+    position: relative;
+    text-align: left;
+    background-color: #ffffff;
+    width: 640px;
+    margin: 120px auto 20px;
+    padding: 30px;
+    height: 250px;
+    font-size: 30px;
+    border-radius: 10px;
+  }
+  
+  
+  .fakenews-quiz-content {
+    padding-top: 30px; /* 헤더의 높이와 동그라미 버튼을 고려한 여백 */
+    text-align: center;
+  }
+  
+  
+
+  
+  /* 상단 색상 띠 */
+  .fakenews-quiz-box-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #e2d46a; /* 예시 색상 */
+    height: 30px;
+    border-radius: 10px 10px 0 0; /* 상단 모서리만 둥글게 */
+  }
+  
+  
+  /* 왼쪽에 버튼 배치하기 위한 컨테이너 */
+  .fakenews-controls-container {
+    position: absolute;
+    top: -5px; /* 버튼이 색상 띠 중앙에 오도록 조정 */
+    left: 20px; /* 색상 띠의 왼쪽 끝에서부터의 간격 */
+  }
+  
+  
+  /* 컨트롤 버튼 */
+  .fakenews-control-button {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    margin: 12px 5px; /* 버튼 간격 */
+    display: inline-block;
+    background-color: #ffffff; /* 버튼 색상 */
+  }
+  
+  .fakenews-quiz-game-container {
+    display: flex; /* Flexbox를 사용하여 요소들을 나란히 배치 */
+    align-items: flex-start; /* 요소들을 상단 정렬 */
+    justify-content: center; /* 중앙 정렬 */
+    padding: 20px; /* 여백 추가 */
+    width: 100%; /* 전체 너비 */
+    max-width: 1200px; /* 최대 너비 설정 */
+    margin: 0 auto; /* 상하 여백 없이, 좌우 자동 마진으로 중앙 정렬 */
+}
+
+.news-image {
+    flex: 0 0 auto; /* 이미지 크기는 그대로 유지 */
+    margin-right: 20px; /* 오른쪽에 여백 추가 */
+    width: 500px; /* 이미지 너비 고정 */
+    height: 500px; /* 이미지 높이 고정 */
+    margin-top: 100px;
+}
+
+.fakenews-quiz-box {
+    flex: 1; /* 남은 공간을 모두 차지 */
+    padding: 20px; /* 패딩 추가 */
+    background-color: #ffffff;
+    border-radius: 10px;
+    margin-top: 100px;
+    height: 460px;
+}
+
+.news-title {
+    font-weight: bold;
+    /* Additional styling for the title */
+  }
+  
+  .news-body {
+    font-size: 20px;
+    /* Additional styling for the body text */
+  }
+
+  .true-button{
+    background-color: #7f76ff;
+    margin-right: 20px;
+    border-radius: 10px;
+  }
+
+  .false-button{
+    background-color: rgb(248, 116, 116);
+    border-radius: 10px;
+  }
+
+  .button-container {
+    display: flex; /* Flexbox 사용 */
+    justify-content: center; /* 가로 방향으로 중앙 정렬 */
+    margin-top: 70px; /* 버튼 위의 여백을 추가 */
+}
+  
+  .answer-button {
+    margin: 5px; /* 버튼 사이의 간격 */
+    width: 60px;
+    height: 60px;
+    /* 필요한 추가 스타일 */
+  }
+

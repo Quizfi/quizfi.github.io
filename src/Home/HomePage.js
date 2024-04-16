@@ -17,6 +17,11 @@ const HomePage = () => {
     navigate('/emoticon');
   };
 
+  const startfakenewGame = () => {
+    navigate('/fakenews');
+  };
+
+
   const handleMouseEnterIcon = () => {
     setIsMouseOverIcon(true);
     setShowEmail(true);
@@ -66,7 +71,8 @@ const HomePage = () => {
       </div>
       <div className="box clickable" onClick={startemoticonGame}>
         이모티콘 퀴즈</div>
-      <div className="box">준비중</div>
+        <div className="box clickable" onClick={startfakenewGame}>
+        가짜뉴스 퀴즈</div>
       <div className="box">준비중</div>
       <div
         className="contact"

@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './Home/HomePage'; // HomePage 컴포넌트의 경로에 맞게 조정하세요.
-import QuizGame from './components/QuizGame'; // QuizGame 컴포넌트의 경로에 맞게 조정하세요.
-import EmotionQuiz from './components/EmotionQuiz'; // QuizGame 컴포넌트의 경로에 맞게 조정하세요.
-
+import HomePage from './Home/HomePage';
+import QuizGame from './components/QuizGame';
+import EmotionQuiz from './components/EmotionQuiz';
+import FakenewsQuiz from './components/FakenewsQuiz'; // FakenewsQuiz 컴포넌트 임포트
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/saja" element={<QuizGame />} />
         <Route path="/emoticon" element={<EmotionQuiz />} />
+        <Route path="/fakenews" element={<FakenewsQuiz />} /> 
       </Routes>
     </Router>
   );
