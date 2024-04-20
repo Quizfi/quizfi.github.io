@@ -150,8 +150,8 @@
     align-items: center; /* 세로 중앙 정렬 */
     color: #ffffff; /* 아이콘 색상 */
     cursor: pointer; /* 마우스 커서 변경 */
-    width: 40px; /* 박스의 가로 크기 조정 */
-    height: 40px; /* 박스의 세로 크기 조정 */
+    width: 10px; /* 박스의 가로 크기 조정 */
+    height: 10px; /* 박스의 세로 크기 조정 */
     padding: 5px; /* 내부 패딩 조정, 필요에 따라 값 조절 */
     border: none; /* 테두리가 있다면 제거 */
     background-color: #463be6;
@@ -409,8 +409,8 @@ font-size: 20px;
          
      
       .enter-box {
-        width: 40px; /* 2의 비율로 너비를 설정 */
-        height: 32px;
+        width: 5px; /* 2의 비율로 너비를 설정 */
+        height: 5px;
         border-radius: 10px;
         min-width: 0; /* flex 항목이 줄어들 수 있도록 설정 */
         font-size: 15px;

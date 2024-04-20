@@ -188,3 +188,87 @@
   cursor: pointer;
   text-align: center;
 }
+
+.fake-results-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 60%;
+  margin: 100px auto;
+  font-size: 24px;
+  position: relative; /* 상대 위치 설정 */
+}
+
+.fakenewsresult-quiz-box-header {
+  position: absolute; /* 절대 위치 설정 */
+  top: 0; /* 컨테이너 상단에 위치 */
+  left: 0; /* 컨테이너 좌측에 위치 */
+  right: 0; /* 컨테이너 우측까지 확장 */
+  background-color: #e2d46a; /* 색상 설정 */
+  height: 30px;
+  border-radius: 10px 10px 0 0; /* 상단 모서리만 둥글게 */
+}
+
+.fakenewsresult-controls-container {
+  position: absolute; /* 절대 위치 설정 */
+  top: 50%; /* 상단에서 50%의 위치에 있도록 설정 */
+  left: 3%; /* 좌측 가장자리에 위치 */
+  transform: translateY(-50%); /* Y축을 중심으로 -50% 이동하여 수직 중앙에 배치 */
+  display: flex; /* 버튼들을 수평으로 나열 */
+  align-items: center; /* 버튼들을 수직 중앙 정렬 */
+  
+}
+
+.fakenewsresult-control-button {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%; /* 원형 버튼 */
+  background-color: #ffffff; /* 빨간색 버튼 */
+  display: inline-block; /* 인라인-블록 요소로 표시 */
+  margin: 0 5px; /* 양쪽에 마진 설정 */
+}
+
+.result-buttons-container {
+  text-align: center; /* 버튼들을 가운데 정렬 */
+  padding: 20px; /* 적당한 패딩을 추가 */
+  display: flex; /* 플렉스박스를 사용하여 가로로 나열 */
+  justify-content: center; /* 중앙 정렬 */
+  gap: 10px; /* 버튼 사이의 간격 설정 */
+}
+
+.fakenews-restart-button, .fakenews-share-button, .fakenews-home-button {
+  position: absolute;
+  padding: 10px 20px;
+  margin-top: 490px; /* 버튼 간의 상단 마진 설정 */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #5c65eb; /* 재도전하기 버튼 */
+  color: white;
+  }
+
+.fakenews-share-button {
+  background-color: #fffb00; /* 공유하기 버튼 */
+  color: black;
+}
+
+.fakenews-home-button {
+  background-color: #ff5656; /* 홈으로 버튼 */
+  color: white;
+}
+
+.fakenews-restart-button {
+  margin-right: 220px; /* 우측 마진 추가 */
+}
+
+.fakenews-share-button {
+  margin-right: 10px; /* 우측 마진 추가 */
+}
+
+/* 홈으로 버튼에는 margin-right를 추가하지 않음 */
+.fakenews-home-button {
+  margin-left: 175px;
+}
