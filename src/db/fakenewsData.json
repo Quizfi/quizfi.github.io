@@ -257,5 +257,96 @@
     "body": "소말리아의 한 외딴 사막 지역에서 과학자들이 이전에 알려지지 않은 새로운 미네랄을 함유한 운석을 발견했습니다. 이 운석은 땅에 부분적으로 매몰되어 있었으며, 다양한 인종의 과학자들이 현장에서 운석을 조사하며 중요한 발견에 대해 기록하고 있습니다. 이 발견은 과학계에 큰 영향을 미칠 것으로 예상됩니다.",
     "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_37.jpg",
     "answer": true
+  },
+  {
+    "id": 38,
+    "title": "네바다에서 고대 상어 둥지 발견, 실제로는 고대의 유물?",
+    "body": "미국 네바다 사막 한복판에서 수천 년 된 상어 둥지로 추정되는 고대 유물이 발견되었다는 소식이 전해졌습니다. 이 발견은 많은 고고학자들과 과학자들 사이에서 큰 화제가 되고 있으며, 이 유물이 실제로 고대 상어의 것인지에 대한 조사가 진행 중입니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_38.jpg",
+    "answer": false
+  },
+  {
+    "id": 39,
+    "title": "뉴욕, '쥐의 도시' 등극: 인간과 동일한 밀도로 번성하는 쥐의 제국",
+    "body": "뉴욕시의 일부 블록에서 쥐의 밀도가 인간의 밀도와 맞먹을 정도로 높아져서, 이 지역을 '쥐의 도시'라고 부르게 되었습니다. 도시 당국은 이 문제를 해결하기 위해 여러 조치를 시행 중이지만, 쥐의 수는 계속해서 증가하고 있어 주민들 사이에서는 불안과 불편이 커지고 있습니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_39.jpg",
+    "answer": true
+  },
+  {
+    "id": 40,
+    "title": "일본 스사미 해안의 수중 우체통",
+    "body": "일본 스사미 해안 근처에 위치한 독특한 수중 우체통이 다이버들 사이에서 큰 인기를 끌고 있습니다. 이 우체통을 통해 다이버들은 방수 처리된 엽서를 보낼 수 있으며, 주변의 아름다운 산호초와 푸른 바다가 이색적인 경험을 제공합니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_40.jpg",
+    "answer": true
+  },
+  {
+    "id": 41,
+    "title": "아프리카에서 발견된 초대형 다이아몬드, 한 마을의 운명을 바꿔",
+    "body": "아프리카 중부의 작은 마을에서 거대한 다이아몬드가 발견되었습니다. 이 다이아몬드는 무게가 500캐럿이 넘는 것으로 추정되며, 이 발견으로 인해 마을은 급속도로 부유한 지역으로 변모하고 있습니다. 전문가들은 이 다이아몬드가 해당 지역 경제에 어떤 영향을 미칠지에 대해 연구 중입니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_41.jpg",
+    "answer": false
+  },
+  {
+    "id": 42,
+    "title": "세계 최초 비행 자동차의 상용화 발표",
+    "body": "한 기술 스타트업이 세계 최초로 상용 비행 자동차를 발표했다고 주장했습니다. 이 자동차는 도시의 교통 체증을 해결하고, 하늘을 나는 꿈을 실현할 것으로 기대됩니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_42.jpg",
+    "answer": false
+  },
+  {
+    "id": 43,
+    "title": "남극, 세계 최초의 지하 쇼핑몰 개장",
+    "body": "전례 없는 발전으로, 남극에는 이제 세계 최초의 지하 쇼핑몰이 자리 잡고 있습니다. 이 쇼핑몰은 세계 유명 브랜드와 남극 현지 공예품을 판매하는 매장을 갖추고 있으며, 빙하 대륙을 찾는 모험을 즐기는 관광객과 연구원들로 붐비고 있습니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_43.jpg",
+    "answer": false
+  },
+  {
+    "id": 44,
+    "title": "유명 영화배우, 불가사의한 100년 된 시간 캡슐 발견",
+    "body": "유명한 영화배우가 자신의 새로 구입한 저택에서 100년 된 시간 캡슐을 발견했다고 발표했습니다. 이 시간 캡슐 안에는 당대 유명 인사들의 편지와 미공개 사진들이 들어있었습니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_44.jpg",
+    "answer": false
+  },
+  {
+    "id": 45,
+    "title": "북극의 빙하 아래에서 외계 생명체의 흔적 발견",
+    "body": "과학자들은 북극의 빙하 아래에서 외계 생명체의 유전적 흔적을 발견했다고 주장합니다. 이 발견이 인류의 외계 생명체에 대한 이해를 새롭게 할 것으로 보입니다. 북극의 깊은 곳에서 발견된 이 흔적들은 고대 외계 문명의 존재를 암시하는 강력한 증거가 될 수 있으며, 이로 인해 많은 과학적, 철학적 논의가 예상됩니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_45.jpg",
+    "answer": false
+  },
+  {
+    "id": 46,
+    "title": "한국 정부, 2028년부터 로봇 교사 도입 예정",
+    "body": "정부는 오는 2028년부터 초등학교에 로봇 교사를 도입할 계획이라고 발표했습니다. 이 로봇들은 각 과목을 가르칠 수 있는 고도로 개발된 인공지능을 탑재하고 있으며, 학생들에게 맞춤형 교육을 제공할 예정입니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_46.jpg",
+    "answer": false
+  },
+  {
+    "id": 47,
+    "title": "세계 최초의 투명 스마트폰 출시",
+    "body": "테크놀로지 회사 X-Tech가 세계 최초로 완전 투명한 스마트폰을 출시했다고 발표했습니다. 이 스마트폰은 특수 개발된 유리로 만들어져 사용자가 스마트폰을 통해 글자를 읽을 수 있을 뿐만 아니라, 손에 쥔 상태에서도 배경이 보이는 기술을 구현했습니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_47.jpg",
+    "answer": false
+  },
+  {
+    "id": 48,
+    "title": "아마존, 우주에서 주문 배송 시작",
+    "body": "아마존이 국제우주정거장(ISS)에 있는 고객들을 위해 우주 배송 서비스를 시작했다고 발표했습니다. 이 서비스는 특수 제작된 드론을 사용하여 지구 상공에서 직접 배송을 수행하며, 최초의 테스트 배송은 성공적으로 완료되었다고 합니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_48.jpg",
+    "answer": false
+  },
+  {
+    "id": 49,
+    "title": "실종된 유명 배우, 아마존 정글에서 발견",
+    "body": "한 달 전 실종된 유명 할리우드 배우가 아마존 정글에서 발견되었습니다. 구조대에 따르면, 그는 영화 촬영을 위해 방문했다가 길을 잃고 살아남기 위해 정글에서 생활해 왔다고 합니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_49.jpg",
+    "answer": false
+  },
+  {
+    "id": 50,
+    "title": "뉴질랜드, 키위 새를 위한 특별 도시 설립 계획 발표",
+    "body": "뉴질랜드 정부가 멸종 위기에 처한 키위 새를 보호하기 위해 키위 새 전용 도시를 건설할 계획을 발표했습니다. 이 도시는 키위 새가 안전하게 서식하고 번식할 수 있는 환경을 제공할 것이며, 사람의 접근을 엄격히 제한할 예정입니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_50.jpg",
+    "answer": false
   }
 ]
