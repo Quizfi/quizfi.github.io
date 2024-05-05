@@ -348,5 +348,159 @@
     "body": "뉴질랜드 정부가 멸종 위기에 처한 키위 새를 보호하기 위해 키위 새 전용 도시를 건설할 계획을 발표했습니다. 이 도시는 키위 새가 안전하게 서식하고 번식할 수 있는 환경을 제공할 것이며, 사람의 접근을 엄격히 제한할 예정입니다.",
     "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_50.jpg",
     "answer": false
+  },
+  {
+    "id": 51,
+    "title": "인공지능이 인간의 감정을 인식, 처음으로 법정 증언 성공",
+    "body": "최신 인공지능 기술이 감정을 인식하는 능력을 입증하며, 한 법정에서 피고인의 진술을 분석하는데 사용되었습니다. 이 기술은 판사와 배심원이 진실을 파악하는 데 결정적인 역할을 했다고 합니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_51.jpg",
+    "answer": false
+  },
+  {
+    "id": 52,
+    "title": "사하라 사막 오아시스에서 발견된 거대 소용돌이",
+    "body": "사하라 사막 한가운데 있는 오아시스에서 거대한 소용돌이가 발견되어 과학자들의 이목을 집중시키고 있습니다. 이 희귀한 자연 현상은 물이 강력하게 지하로 빨려 들어가는 모습을 보여주며, 주변의 푸른 식물과 대조를 이루는 아름다운 광경을 연출합니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_52.jpg",
+    "answer": false
+  },
+  {
+    "id": 53,
+    "title": "미래 도시에서 음악이 건축을 만나다: 거대한 악기 형태의 빌딩",
+    "body": "음악과 건축의 경계를 허문 미래 도시의 모습이 공개되었습니다. 이 도시에서는 건물들이 첼로, 바이올린과 같은 거대한 악기 형태로 지어져 있으며, 거리는 피아노 건반처럼 디자인되어 있습니다. 도시 곳곳에서는 하늘을 나는 바이올린 형태의 차량들이 날아다니며, 음악 노트들이 공중에 떠다니는 모습이 활기찬 도시 생활과 조화를 이룹니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_53.jpg",
+    "answer": false
+  },
+  {
+    "id": 54,
+    "title": "미래 도시, 투명한 돔으로 덮여",
+    "body": "기후 변화에 대응하기 위해 미국의 한 도시가 거대한 투명 돔으로 완전히 덮였습니다. 이 돔은 도시를 극단적인 날씨로부터 보호하고, 도시 기후를 조절하는 역할을 합니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_54.jpg",
+    "answer": false
+  },
+  {
+    "id": 55,
+    "title": "지하 철도 네트워크, 시간 여행 실험 장소로 사용",
+    "body": "런던의 지하 철도 네트워크가 시간 여행 연구의 비밀 실험 장소로 사용되고 있다는 보고가 나왔습니다. 연구팀은 특정 조건에서는 시간이 느리게 흐를 수 있다는 증거를 찾았다고 합니다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_55.jpg",
+    "answer": false
+  },
+  {
+    "id": 56,
+    "title": "유전자 편집으로 탄생한 첫 '능력 강화' 아기",
+    "body": "최근 유전자 편집 기술이 한계를 넘어섰다. 연구팀은 CRISPR 기술을 이용해 체력과 면역력이 뛰어난 아기를 탄생시켰다고 주장한다. 이 아기는 비범한 에너지와 감염 저항력을 보여주고 있으며, 이러한 발전이 과학계 내에서 윤리적 논란을 불러일으키고 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_56.jpg",
+    "answer": false
+  },
+  {
+    "id": 57,
+    "title": "아마존이 킬로보트 배달 시스템을 시작",
+    "body": "아마존이 최근에 자동으로 배달하는 무인 보트, '킬로보트'를 공개했다고 한다. 이 보트들은 특히 강과 운하가 많은 도시에서 상품을 배달하는 데 사용될 예정이며, 배송 시간을 대폭 줄여줄 것으로 기대된다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_57.jpg",
+    "answer": false
+  },
+  {
+    "id": 58,
+    "title": "세계 최초의 무중력 체육관 개장",
+    "body": "도쿄에 위치한 세계 최초의 무중력 체육관이 문을 열었다. 이 체육관은 특수 제작된 환경에서 방문객들이 중력의 영향 없이 운동할 수 있게 해준다. 이 체육관에서는 무중력 요가와 에어로빅 수업이 인기를 끌고 있다고 한다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_58.jpg",
+    "answer": false
+  },
+  {
+    "id": 59,
+    "title": "인공지능이 작성한 소설, 주요 문학상 수상",
+    "body": "최근 한 인공지능 프로그램이 작성한 소설이 국제적으로 유명한 문학상을 수상했다. 이 소설은 인간 작가의 작품과 구별하기 어려울 정도로 높은 품질을 보여줬으며, 문학계에서 큰 논란을 불러일으키고 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_59.jpg",
+    "answer": false
+  },
+  {
+    "id": 60,
+    "title": "신형 전기차, 단 한 번의 충전으로 지구 한 바퀴 주행 가능",
+    "body": "최근 한 자동차 회사가 새로운 전기차 모델을 발표했다. 이 차량은 단 한 번의 충전으로 40,000km를 주행할 수 있어, 지구 한 바퀴를 돌 수 있다고 주장한다. 이 차량은 다음 달부터 시장에 출시될 예정이다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_60.jpg",
+    "answer": false
+  },
+  {
+    "id": 61,
+    "title": "과학자들이 만든 투명한 나무",
+    "body": "과학자들이 특별한 화학 처리를 통해 나무를 투명하게 만드는 데 성공했다. 이 투명 나무는 기존의 유리를 대체할 수 있는 잠재력을 가지고 있으며, 더 효율적인 에너지 사용이 가능하게 해 줄 것으로 기대된다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_61.jpg",
+    "answer": true
+  },
+  {
+    "id": 62,
+    "title": "연구에 따르면 꿀벌은 숫자를 세고 수학 문제를 풀 수 있다",
+    "body": "최근 연구에서 꿀벌이 간단한 수학 문제를 해결할 수 있는 능력을 가지고 있다는 사실이 밝혀졌다. 꿀벌은 숫자를 인식하고, 더하기와 빼기 같은 기본적인 수학적 연산을 수행할 수 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_62.jpg",
+    "answer": true
+  },
+  {
+    "id": 63,
+    "title": "세계 최초로 클론된 애완 동물 서비스 시작",
+    "body": "한 바이오테크 회사가 세계 최초로 상업적 애완 동물 클로닝 서비스를 시작했다. 이 서비스를 통해 고객은 사랑하는 애완 동물의 유전적 복제본을 얻을 수 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_63.jpg",
+    "answer": true
+  },
+  {
+    "id": 64,
+    "title": "태양계 밖에서 발견된 지구와 비슷한 행성에서 물 증거 발견",
+    "body": "천문학자들이 태양계 밖에서 지구와 유사한 크기와 조건을 가진 행성에서 물의 증거를 발견했다. 이 발견은 외계 생명체의 존재 가능성을 더욱 뒷받침하는 중요한 증거로 평가받고 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_64.jpg",
+    "answer": true
+  },
+  {
+    "id": 65,
+    "title": "뉴욕 시에서 도시 공공 교통에 무료 와이파이 제공",
+    "body": "뉴욕 시가 모든 공공 교통 수단에 무료 와이파이 서비스를 제공하기 시작했다고 발표했다. 이 서비스는 버스, 지하철, 페리를 포함한 모든 교통 수단에 적용되며, 시민들의 통신 접근성을 크게 향상시킬 것으로 기대된다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_65.jpg",
+    "answer": false
+  },
+  {
+    "id": 66,
+    "title": "화성에서 발견된 고대 외계 도시의 유적",
+    "body": "NASA의 최신 화성 탐사 로버가 화성의 한 지역에서 고대 외계 문명의 도시 유적을 발견했다고 발표했다. 이 유적에서는 다양한 건축물과 조각상이 발견되었으며, 이는 화성에 고대 문명이 존재했음을 시사한다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_66.jpg",
+    "answer": false
+  },
+  {
+    "id": 67,
+    "title": "세계 최초로 인공 지능 시장 분석가가 주식 거래에서 최고의 성과를 보여",
+    "body": "최근 개발된 인공 지능 프로그램이 금융 분야에서 역사적인 성과를 달성했다. 이 AI는 주식 시장에서의 거래를 담당하며, 그 성과는 최고의 인간 분석가들을 능가했다고 한다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_67.jpg",
+    "answer": false
+  },
+  {
+    "id": 68,
+    "title": "바다 속에서 살아있는 마멀레이드 상어 발견",
+    "body": "해양 생물학자들이 특이한 발견을 했다. 투명하고 오렌지색 젤리 같은 외모를 지닌 새로운 상어 종을 발견했다고 하는데, 이를 '마멀레이드 상어'라고 명명했다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_68.jpg",
+    "answer": false
+  },
+  {
+    "id": 69,
+    "title": "베네치아 운하에서 발견된 500년 된 유령 배",
+    "body": "베네치아의 운하에서 관광객들이 예기치 않게 500년 전의 배를 발견했다고 한다. 이 배는 완벽하게 보존되어 있으며, 전설 속에만 존재하던 유령 배라는 이야기가 현실로 드러났다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_69.jpg",
+    "answer": false
+  },
+  {
+    "id": 70,
+    "title": "북극곰의 DNA가 인간과 99% 일치한다는 연구 결과 발표",
+    "body": "최근 과학자들은 북극곰의 DNA를 분석한 결과, 인간의 DNA와 99%가 일치한다는 놀라운 연구 결과를 발표했다. 이 발견은 진화론에 대한 새로운 논쟁을 불러일으킬 것으로 예상된다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_70.jpg",
+    "answer": false
+  },
+  {
+    "id": 71,
+    "title": "애플이 스마트폰 배터리 수명을 인위적으로 단축시킨다는 증거 발견",
+    "body": "한 해커 그룹이 애플의 내부 문서를 해킹하여 회사가 고의로 스마트폰의 배터리 수명을 단축시키는 소프트웨어를 사용하고 있다는 증거를 찾아냈다고 주장한다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_71.jpg",
+    "answer": false
+  },
+  {
+    "id": 72,
+    "title": "고대 이집트 문명이 외계인과 접촉했다는 증거, 피라미드에서 발견",
+    "body": "이집트 고고학자들이 피라미드 내부에서 발견한 새로운 유적은 고대 이집트인들이 외계인과 교류했다는 명확한 증거를 제공한다. 발견된 유물에는 명백히 외계 기술이 사용된 흔적이 포함되어 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_72.jpg",
+    "answer": false
   }
 ]
