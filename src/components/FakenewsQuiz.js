@@ -30,7 +30,7 @@ const FakenewsQuiz = () => {
 
     const checkAnswer = (userAnswer) => {
         const isCorrect = userAnswer === currentNews.answer;
-        setAnswerMessage(isCorrect ? `정답! ${userAnswer ? "진실" : "거짓"}입니다!` : `오답! ${!userAnswer ? "진실" : "거짓"}입니다!`);
+        setAnswerMessage(isCorrect ? `정답! ${userAnswer ? "진짜뉴스" : "가짜뉴스"}입니다!` : `오답! ${!userAnswer ? "진짜뉴스" : "가짜뉴스"}입니다!`);
         setIsAnswerShown(true);
         if (isCorrect) {
             setCorrectAnswers(correctAnswers + 1);

@@ -502,5 +502,201 @@
     "body": "이집트 고고학자들이 피라미드 내부에서 발견한 새로운 유적은 고대 이집트인들이 외계인과 교류했다는 명확한 증거를 제공한다. 발견된 유물에는 명백히 외계 기술이 사용된 흔적이 포함되어 있다.",
     "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_72.jpg",
     "answer": false
+  },
+  {
+    "id": 73,
+    "title": "첫 번째 타임머신, 2030년 공개 예정",
+    "body": "국제 과학자 팀이 2030년에 첫 번째 타임머신을 공개할 계획이라고 발표했다. 이 기계는 시간을 거슬러 과거로 여행할 수 있는 기능을 가지고 있으며, 초기 테스트에서 이미 몇 초를 되돌릴 수 있었다고 한다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_73.jpg",
+    "answer": false
+  },
+  {
+    "id": 74,
+    "title": "전 세계 커피 나무 전멸 위기",
+    "body": "최근 발표된 연구에 따르면, 지구 온난화로 인해 다음 50년 안에 전 세계의 커피 나무가 전멸할 가능성이 있다고 한다. 이는 커피 생산에 큰 타격을 줄 것이며, 커피 가격이 급등할 것으로 예상된다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_74.jpg",
+    "answer": false
+  },
+  {
+    "id": 75,
+    "title": "화성에서 최초의 호텔 개장",
+    "body": "한 민간 우주 탐사 회사가 화성에 최초의 호텔을 개장했다고 발표했다. 이 호텔은 완전 자동화되어 있으며, 지구에서 화성까지의 여행 패키지를 포함해 제공된다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_75.jpg",
+    "answer": false
+  },
+  {
+    "id": 76,
+    "title": "디지털 기억 전송 기술 개발",
+    "body": "과학자들이 인간의 기억을 디지털 데이터로 전송할 수 있는 기술을 개발했다. 이 기술은 특히 기억 상실증 환자들에게 새로운 기억을 심어줄 수 있는 가능성을 제시한다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_76.jpg",
+    "answer": false
+  },
+  {
+    "id": 77,
+    "title": "스코틀랜드에 있는 섬 하나가 하루에 두 번 사라진다",
+    "body": "스코틀랜드 북부 해안에 위치한 스탭 홀름(Stapp Holm) 섬은 매일 두 차례 조수에 의해 완전히 물에 잠긴다. 이 현상은 해당 지역의 강한 조류와 해수면 상승 때문에 발생하며, 섬은 몇 시간 후에 다시 나타난다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_77.jpg",
+    "answer": true
+  },
+  {
+    "id": 78,
+    "title": "세계에서 가장 작은 책 출판",
+    "body": "일본에서 출판된 세계에서 가장 작은 책은 크기가 겨우 0.75mm x 0.75mm에 불과하다. 이 책은 미세 조각 기술을 사용하여 만들어졌으며, 맨눈으로는 내용을 읽을 수 없다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_78.jpg",
+    "answer": true
+  },
+  {
+    "id": 79,
+    "title": "도심 속 야생 여우, 사람들과 공존",
+    "body": "런던 도심에서 야생 여우가 발견되고 있다. 이 여우들은 도시 환경에 잘 적응하여 밤에 활동하며, 때때로 주민들과 교류하기도 한다. 도시화가 진행되어도 이들은 도시 생활을 이어가고 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_79.jpg",
+    "answer": true
+  },
+  {
+    "id": 80,
+    "title": "인도의 핑크 빛 호수",
+    "body": "인도의 론라르 호수는 그 특유의 핑크색을 띠고 있어 관광객들의 이목을 끈다. 이 색깔은 호수의 특정 미생물에 의해 생성되는 색소 때문이다. 호수의 이색적인 뷰는 특히 일출과 일몰 때 더욱 두드러진다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_80.jpg",
+    "answer": true
+  },
+  {
+    "id": 81,
+    "title": "자동차 연료로 커피 찌꺼기 사용 가능",
+    "body": "최근의 한 기술 혁신으로 자동차 연료로 커피 찌꺼기를 사용할 수 있게 되었다고 한다. 이 새로운 연료는 환경 친화적이며 기존의 디젤 연료보다 경제적이라고 한다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_81.jpg",
+    "answer": false
+  },
+  {
+    "id": 82,
+    "title": "알래스카에서 발견된 새로운 종류의 파란 곰",
+    "body": "알래스카의 외딴 지역에서 파란색 털을 가진 곰이 발견되었다고 한다. 이 현상은 유전적 돌연변이 때문인 것으로 추정되며, 과학자들은 더 많은 연구를 계획하고 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_82.jpg",
+    "answer": false
+  },
+  {
+    "id": 83,
+    "title": "빙하에서 발견된 10,000년 된 바이러스",
+    "body": "최근 남극에서 녹아내린 빙하 속에서 10,000년 된 바이러스가 발견되었다고 한다. 이 바이러스는 현대 의학으로는 아직 치료법이 없으며, 과학자들은 바이러스의 확산을 막기 위해 긴급히 연구를 진행 중이다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_83jpg",
+    "answer": false
+  },
+  {
+    "id": 84,
+    "title": "스마트폰으로 운전면허 시험 치르기 가능",
+    "body": "새로운 정부 규정에 따라, 시민들은 이제 스마트폰을 사용하여 집에서 편하게 운전면허 시험을 치를 수 있다. 이 시스템은 인공지능을 사용하여 사용자의 운전 스킬을 평가한다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_84.jpg",
+    "answer": false
+  },
+  {
+    "id": 85,
+    "title": "세계 최초로 달에서 진행된 결혼식",
+    "body": "최근 한 부유한 커플이 세계 최초로 달 표면에서 결혼식을 올렸다고 한다. 이 역사적인 이벤트는 전세계적으로 생중계되었으며, 우주 여행의 새로운 가능성을 제시했다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_85.jpg",
+    "answer": false
+  },
+  {
+    "id": 86,
+    "title": "매년 한 번씩 열리는 뉴질랜드의 '가짜 마라톤'",
+    "body": "뉴질랜드에서는 매년 '가짜 마라톤'이 열리며, 참가자들은 실제로 달리지 않고 다양한 복장을 입고 사진을 찍으며 즐긴다. 이 행사는 자선 모금을 위해 시작되었으며, 지금은 많은 사람들이 참여하는 인기 행사로 자리잡았다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_86.jpg",
+    "answer": true
+  },
+  {
+    "id": 87,
+    "title": "아이슬란드의 빙하 아래 숨겨진 화산",
+    "body": "아이슬란드의 빙하 아래에는 활동적인 화산이 숨겨져 있으며, 이는 빙하가 녹으면서 가끔 화산 폭발을 일으킨다. 이러한 폭발은 아름다운 자연 현상과 함께 때로는 큰 자연 재해를 초래하기도 한다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_87.jpg",
+    "answer": true
+  },
+  {
+    "id": 88,
+    "title": "파리의 고양이 카페, 도시 생활의 스트레스 해소에 도움",
+    "body": "파리 도심에 위치한 여러 고양이 카페들이 도시 생활의 스트레스를 해소하는 데 큰 도움을 주고 있다. 방문객들은 카페에서 고양이와 놀면서 일상의 긴장을 풀 수 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_88.jpg",
+    "answer": true
+  },
+  {
+    "id": 89,
+    "title": "자동차 대신 자전거를 타는 네덜란드의 도시",
+    "body": "네덜란드의 많은 도시들에서는 자동차 사용을 줄이고 자전거 이용을 장려하고 있다. 특히 암스테르담은 전 세계에서 가장 자전거 친화적인 도시 중 하나로 알려져 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_89.jpg",
+    "answer": true
+  },
+  {
+    "id": 90,
+    "title": "남극의 얼음 속에서 발견된 새로운 종류의 심해어",
+    "body": "남극의 얼음 아래에서 과학자들이 새로운 종류의 심해어를 발견했다. 이 심해어는 극한의 추운 환경에서 생존할 수 있는 독특한 능력을 가지고 있으며, 이는 해양 생물학에 중요한 발견으로 여겨진다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_90.jpg",
+    "answer": true
+  },
+  {
+    "id": 91,
+    "title": "우주에서 발견된 물질, 다이아몬드보다 100배 강한 '우주 금속'",
+    "body": "NASA의 우주 탐사선이 소행성에서 채취한 새로운 물질이 지구상의 어떤 물질보다 100배 강한 것으로 밝혀졌다. 이 '우주 금속'은 미래의 건축 및 제조업에 혁명을 일으킬 가능성이 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_91.jpg",
+    "answer": false
+  },
+  {
+    "id": 92,
+    "title": "전 세계 인터넷 중단 사태, 가짜 바이러스 경고로 인한 혼란",
+    "body": "국제 사이버 보안 기구가 발표한 바에 따르면, 최근 퍼진 바이러스 경고는 실제로는 가짜였으나, 이로 인해 전 세계적으로 인터넷 사용자들 사이에 큰 혼란을 야기했다. 이 가짜 경고는 인터넷이 48시간 동안 중단될 것이라는 내용을 포함하고 있었다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_92.jpg",
+    "answer": false
+  },
+  {
+    "id": 93,
+    "title": "인간의 언어를 이해하고 말하는 새, '학대 토키'",
+    "body": "독일의 한 연구팀이 인간의 언어를 완벽하게 이해하고 대화할 수 있는 새 종을 발견했다고 주장한다. 이 '학대 토키'라 불리는 새는 놀라울 정도로 정확한 언어 능력을 보여준다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_93jpg",
+    "answer": false
+  },
+  {
+    "id": 94,
+    "title": "해저 2만 리, 신비한 해저 도시 발견",
+    "body": "태평양의 깊은 해저에서 신비로운 고대 도시가 발견되었다고 한다. 이 도시는 수천 년 전에 침몰했으며, 완벽하게 보존된 상태로 발견되었다는 보고가 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_94.jpg",
+    "answer": false
+  },
+  {
+    "id": 95,
+    "title": "아마존, 드론을 통해 고객에게 피자 배달 시작",
+    "body": "아마존이 새로운 드론 배달 서비스를 시작하여 고객에게 피자를 집 앞까지 배달한다고 발표했다. 이 서비스는 현재 시범 운영 중이며, 몇 시간 내에 전국으로 확대될 예정이다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_95.jpg",
+    "answer": false
+  },
+  {
+    "id": 96,
+    "title": "세계 최초의 인공지능 시장",
+    "body": "캘리포니아에서 세계 최초로 완전히 인공지능으로 운영되는 쇼핑몰이 문을 열었다. 이 쇼핑몰에는 사람 대신 AI 로봇이 상품을 판매하며, 모든 결제 시스템과 고객 서비스가 자동화되어 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_96.jpg",
+    "answer": false
+  },
+  {
+    "id": 97,
+    "title": "지하철에서만 작동하는 전용 스마트폰 출시",
+    "body": "한 스타트업이 지하철에서만 작동하는 전용 스마트폰을 개발했다고 발표했다. 이 특수 제작된 폰은 지하철 내의 특정 주파수에서만 신호를 받을 수 있어, 지하철 이용객들에게 최적화된 서비스를 제공한다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_97.jpg",
+    "answer": false
+  },
+  {
+    "id": 98,
+    "title": "북극의 얼음이 모두 녹으면 새로운 대륙이 나타난다",
+    "body": "과학자들은 최근 연구를 통해 북극의 얼음이 완전히 녹으면 숨겨진 새로운 대륙이 나타날 것이라는 이론을 제시했다. 이 대륙은 고대 문명의 흔적을 포함하고 있을 가능성이 높다고 한다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_98jpg",
+    "answer": false
+  },
+  {
+    "id": 99,
+    "title": "로봇이 주인공인 첫 헐리우드 영화 개봉",
+    "body": "헐리우드에서 로봇이 주인공인 첫 영화가 개봉했다. 이 영화에서 로봇은 실제 인간 배우 없이 모든 역할을 수행하며, 감정 표현 또한 인공지능을 통해 이루어진다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_99.jpg",
+    "answer": false
+  },
+  {
+    "id": 100,
+    "title": "전 세계 바다의 물이 달로 이동",
+    "body": "NASA의 최신 보고서에 따르면, 지구의 중력장 변화로 인해 지구의 바다 물 일부가 달로 이동하고 있다고 한다. 이 현상은 지구와 달의 균형을 재조정하는 자연의 방법일 수 있다.",
+    "imageUrl": "https://gi.esmplus.com/jjumang/quiz/Fakenews/fakenews_100.jpg",
+    "answer": false
   }
 ]
